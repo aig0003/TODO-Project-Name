@@ -13,7 +13,30 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
+  test() {
+    /**function othername() {
+      <!--var input = document.getElementById("userInput").value;-->
+      <!--alert(input);-->
+
+      var geocoder = new google.maps.Geocoder();
+      var address = document.getElementById("userInput").value;
+
+      geocoder.geocode( { 'address': address}, function(results, status) {
+
+        if (status == google.maps.GeocoderStatus.OK) {
+          var latitude = results[0].geometry.location.lat();
+          var longitude = results[0].geometry.location.lng();
+          alert(latitude);
+        }
+      });
+    }*/
+  }
+
   ngOnInit() {
+    let btn = document.getElementById('locationSearchButton');
+    btn.addEventListener("click", function(){
+      console.log("This is a god damn test");
+    });
     //this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9' +
       //'c4b29b11/37.8267,-122.4233').subscribe(data => {
       //console.log(data);
@@ -149,8 +172,5 @@ export class AppComponent implements OnInit {
             }
           }
      */
-  }
-
-  test() {
   }
 }
