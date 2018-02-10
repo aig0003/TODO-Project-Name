@@ -47,15 +47,19 @@ export class AppComponent implements OnInit {
           alert("Invalid address. Please try again");
         }
         console.log("About to return");
-        this.printLocationData(userInput, json);
-		console.log("Please work");
-		this.locateByCoordinates(location.geometry.location);
+        this.printLocationData(json);
+        console.log("Is this reached?");
       });
   }
 
-  printLocationData(userInput:HTMLInputElement, jsonData:any) {
-      let locField = <HTMLElement>document.getElementById('locationDataField');
-      locField.innerHTML = jsonData.results[0].formatted_address;
+  printLocationData(jsonData:any) {
+    let locField = <HTMLElement>document.getElementById('locationDataField');
+    locField.innerHTML = jsonData.results[0].formatted_address; //There is a lot more info here, check https://developers.google.com/maps/documentation/geocoding/start for more.
+  }
+
+  printWeatherData(weatherJSON:any) {
+    let weatherField = <HTMLElement>document.getElementById('currentWeatherDataField');
+    weatherField.innerHTML = "Here is some weather";
   }
 
   ngOnInit() {
