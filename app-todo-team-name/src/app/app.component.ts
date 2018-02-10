@@ -13,24 +13,16 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
-  locateByCoordinates() {
+  locateByCoordinates(latitude : number, longitude : number) {
     console.log("Run test function");
-    /**function othername() {
-      <!--var input = document.getElementById("userInput").value;-->
-      <!--alert(input);-->
-
-      var geocoder = new google.maps.Geocoder();
-      var address = document.getElementById("userInput").value;
-
-      geocoder.geocode( { 'address': address}, function(results, status) {
-
-        if (status == google.maps.GeocoderStatus.OK) {
-          var latitude = results[0].geometry.location.lat();
-          var longitude = results[0].geometry.location.lng();
-          alert(latitude);
+	this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9c4b29b11/37.8267,-122.4233')
+      .subscribe((json: any) => {
+        if (json.results.length != 0) { //If there are no results then the address is invalid.
+          console.log(json.results);
+        } else {
+          alert("Invalid address. Please try again");
         }
       });
-    }*/
   }
 
   lookupAddressOnGoogle(userInput: HTMLInputElement){
