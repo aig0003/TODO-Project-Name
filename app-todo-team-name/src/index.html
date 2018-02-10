@@ -9,6 +9,15 @@
   <style>
 	<!-- Tool Bar -->
 	* {box-sizing: border-box;}
+	
+	<!--.myVideo {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		min-width: 100%;
+		min-height: 100%;
+	}-->
+	
 
 	.topnav {
 		overflow: hidden;
@@ -103,28 +112,41 @@
   </style>
 
 </head>
-<body>
+<body onload = displayClock();>
+	<div style="position: fixed; z-index: -99; width: 100%; height: 100%">
+		<iframe width="100%" height="100%" 
+			src="https://www.youtube.com/embed/BIzjbEG3EQs?autoplay=1&controls=0&loop=1&rel=0&showinfo=0&playlist=BIzjbEG3EQs" frameborder="0">
+		</iframe>
+	</div>
 	<div class="topnav">
 		<a href="#home">Home</a>
 		<!-- Date -->
 		<a id="date"></a>
 		<script>
-			n = new Date();
-			y = n.getFullYear();
-			m = n.getMonth() + 1;
-			d = n.getDate();
-			hh = n.getHours();
-			h = hh;
-			dd = "AM";
-			if (h >= 12) {
-				h = hh - 12;
-				dd = "PM";
+			function clockRefresh() {
+				var refresh = 1000;
+				myTime = setTimeout('displayClock()', refresh)
 			}
-
-			if (h == 0) {
-				h = 12;
+			
+			function displayClock() {
+				var n = new Date()
+				var hh = n.getHours();
+				var h = hh;
+				var dd = "AM";
+				if (h >= 12) {
+					h = hh - 12;
+					dd = "PM";
+				}
+			
+				if (h == 0) {
+					h = 12;
+				}
+				var d = (("0" + h).slice(-2)) + ":" + (("0" + n.getMinutes()).slice(-2)) + dd + " " + (("0" + (n.getMonth() + 1)).slice(-2)) + "/" + (("0" + n.getDate()).slice(-2)) + "/" + n.getFullYear();
+				document.getElementById("date").innerHTML = d;
+				clockRefresh();
 			}
-			document.getElementById("date").innerHTML = (("0" + h).slice(-2)) + ":" + (("0" + n.getMinutes()).slice(-2)) + dd + " " + (("0" + m).slice(-2)) + "/" + (("0" + d).slice(-2)) + "/" + y;
+			
+			<!--document.getElementById("date").innerHTML = (("0" + h).slice(-2)) + ":" + (("0" + n.getMinutes()).slice(-2)) + dd + " " + (("0" + m).slice(-2)) + "/" + (("0" + d).slice(-2)) + "/" + y;-->
 		</script>
 		<!-- Location Bar -->
 		<div class="search-container">
@@ -161,12 +183,5 @@
 			<script type="text/javascript" src="https://darksky.net/widget/default-small/42.360082,-71.05888/us12/en.js?width=undefined&height=70&title=Full Forecast&textColor=333333&bgColor=FFFFFF&skyColor=333&fontFamily=Default&customFont=&units=us"></script>
 		</div>
 	</div>
-
-	<form action="https://www.google.com">
-		<button type="submit">Change</button>
-	</form>
-
-
-  <app-root></app-root>
 </body>
 </html>
