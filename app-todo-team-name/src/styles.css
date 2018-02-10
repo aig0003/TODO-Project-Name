@@ -1,11 +1,21 @@
+/* This is the entire page */
 body {
-	
+	/*background-color:	input choice here;*/ 
 }
 
+/* This is the heading font */
 h1 {
-	
+	/*color: insert here;*/
+	/*font-family: insert here;*/
+	/*font-size: insert here;*/
 }
 
+/* This is the paragraph font.*/
 p	{
-	
+	/*color: insert here;*/
+	/*font-family: insert here;*/
+	/*font-size: insert here;*/
+	/*border: 1px solid *color*; */
+	/*padding: 30px; space between text and border*/
+	/*margin: 50px; space between margin outside border*/
 }
