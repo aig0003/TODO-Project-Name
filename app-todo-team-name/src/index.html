@@ -8,14 +8,16 @@
   <link rel="stylesheet" href="styles.css">
   <style>
 	<!-- Tool Bar -->
-	#myVideo {
+	* {box-sizing: border-box;}
+	
+	<!--.myVideo {
 		position: fixed;
 		right: 0;
 		bottom: 0;
 		min-width: 100%;
 		min-height: 100%;
-	}
-	* {box-sizing: border-box;}
+	}-->
+	
 
 	.topnav {
 		overflow: hidden;
@@ -111,10 +113,11 @@
 
 </head>
 <body onload = displayClock();>
-	<video autoplay muted loop id="myVideo">
-		<source src="//Motion_Graphics_720p/Sunny.mp4" type="video/mp4">
-		Your browser does not support HTML5 videos.
-	</video>
+	<div style="position: fixed; z-index: -99; width: 100%; height: 100%">
+		<iframe width="100%" height="100%" 
+			src="https://www.youtube.com/embed/BIzjbEG3EQs?autoplay=1&controls=0&loop=1&rel=0&showinfo=0&playlist=BIzjbEG3EQs" frameborder="0">
+		</iframe>
+	</div>
 	<div class="topnav">
 		<a href="#home">Home</a>
 		<!-- Date -->
@@ -138,7 +141,7 @@
 				if (h == 0) {
 					h = 12;
 				}
-				var d = (("0" + h).slice(-2)) + ":" + (("0" + n.getMinutes()).slice(-2)) + dd + " " + (("0" + n.getMonth() + 1).slice(-2)) + "/" + (("0" + n.getDate()).slice(-2)) + "/" + n.getFullYear();
+				var d = (("0" + h).slice(-2)) + ":" + (("0" + n.getMinutes()).slice(-2)) + dd + " " + (("0" + (n.getMonth() + 1)).slice(-2)) + "/" + (("0" + n.getDate()).slice(-2)) + "/" + n.getFullYear();
 				document.getElementById("date").innerHTML = d;
 				clockRefresh();
 			}
