@@ -31,7 +31,7 @@
 		color: #000000;
 	}
 	<!-- Current Weather Box End -->
-	
+
   </style>
 
 </head>
@@ -44,7 +44,7 @@
 				if (0 <= currentTime && currentTime < 4) {
 					document.getElementById("topnav").style.backgroundColor = "yellow";
 				}
-	
+
 				else if (13 <= currentTime && currentTime < 16) {
 					document.getElementById("topnav").style.backgroundColor = "yellow";
 				}
@@ -59,7 +59,7 @@
 				var refresh = 1000;
 				myTime = setTimeout('displayClock()', refresh)
 			}
-			
+
 			<!-- Clock Display Format -->
 			function displayClock() {
 				var n = new Date()
@@ -77,16 +77,24 @@
 				var d = (("0" + h).slice(-2)) + ":" + (("0" + n.getMinutes()).slice(-2)) + dd + " \n" + (("0" + (n.getMonth() + 1)).slice(-2)) + "/" + (("0" + n.getDate()).slice(-2)) + "/" + n.getFullYear();
 				document.getElementById("date").innerHTML = d;
 				clockRefresh();
-			}			
+			}
 		</script>
 		<!-- Location Bar -->
 		<div class="search-container">
-			<input type="text" placeholder="Please Enter Location..." name="location" id="userInput">
+			<input type="text" placeholder="Please Enter Location..." name="location" id="locationSearchBox">
 			<button id="locationSearchButton">Submit</button>
 		</div>
 	</div>
 
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+  <!-- Location Data -->
+  <div class="backgroundBox">
+    <div class="transbox">
+      <h1><center>Location</center></h1>
+      <div id="locationDataField"></div>
+    </div>
+  </div>
 
 	<!-- Current Weather -->
 	<div class="backgroundBox">
@@ -104,14 +112,14 @@
 		</div>
 	</div>
   <app-root></app-root> <!--this line is important-->
-	
+
 	<!-- Minute By Minute -->
 	<div class="backgroundBox">
 		<div class="transbox">
 			<h1><center>Minute-By-Minute</center></h1>
 		</div>
 	</div>
-	
+
 	<!-- Hour By Hour -->
 	<div class="backgroundBox">
 		<div class="transbox">
@@ -150,12 +158,12 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Days Ago -->
-	
+
 	<!-- Months Ago -->
-	
+
 	<!-- Years Ago -->
-	
+
 </body>
 </html>

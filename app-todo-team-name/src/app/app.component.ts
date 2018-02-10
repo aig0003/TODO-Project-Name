@@ -33,24 +33,43 @@ export class AppComponent implements OnInit {
     }*/
   }
 
-  lookupAddressOnGoogle(searchTerm: string) {
+  lookupAddressOnGoogle(userInput: HTMLInputElement){
+    var searchTerm = userInput.value;
     searchTerm.replace(' ', '+');
     let key = 'AIzaSyDJn2Xy60RsDcuC1YDydzkBlzIME7SWCYc';
 
     this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + searchTerm + '&key=' + key)
       .subscribe((json: any) => {
+        console.log(json);
         if (json.results.length != 0) { //If there are no results then the address is invalid.
-          console.log(json.results);
+          /**if (json.results.length > 1) { //There are more than one responses. Returns the first one as it is more common.
+            alert("There were more than one results for this search. If the data is incorrect, consider being more specific.");
+          }*/
+          var location = json.results[0]; //Defaults to first one.
+          console.log("Coordinates: ");
+          console.log(location.geometry.location);
         } else {
           alert("Invalid address. Please try again");
         }
+        console.log("About to return");
+        this.printLocationData(userInput, json);
       });
+  }
+
+  printLocationData(userInput:HTMLInputElement, jsonData:any) {
+      let locField = <HTMLElement>document.getElementById('locationDataField');
+      locField.innerHTML = jsonData.results[0].formatted_address;
   }
 
   ngOnInit() {
     let btn = document.getElementById('locationSearchButton');
+    let userInput = <HTMLInputElement>document.getElementById('locationSearchBox');
     btn.addEventListener("click", () => {
-      this.lookupAddressOnGoogle("1131 S. College St.");
+      if (userInput.value.length > 0) {
+        this.lookupAddressOnGoogle(userInput);
+      } else {
+        alert("Please enter a search term");
+      }
     });
     //this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9' +
       //'c4b29b11/37.8267,-122.4233').subscribe(data => {
