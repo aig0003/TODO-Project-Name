@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
-  test() {
+  locateByCoordinates() {
+    console.log("Run test function");
     /**function othername() {
       <!--var input = document.getElementById("userInput").value;-->
       <!--alert(input);-->
@@ -34,8 +35,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     let btn = document.getElementById('locationSearchButton');
-    btn.addEventListener("click", function(){
-      console.log("This is a god damn test");
+    btn.addEventListener("click", () => {
+      this.locateByCoordinates();
     });
     //this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9' +
       //'c4b29b11/37.8267,-122.4233').subscribe(data => {
