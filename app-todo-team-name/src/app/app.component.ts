@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
 
   printLocationData(userInput:HTMLInputElement, jsonData:any) {
       let locField = <HTMLElement>document.getElementById('locationDataField');
-      locField.innerHTML = jsonData.results[0].formatted_address;
+      locField.innerHTML = jsonData.results[0].formatted_address; //There is a lot more info here, check https://developers.google.com/maps/documentation/geocoding/start for more.
   }
 
   ngOnInit() {
