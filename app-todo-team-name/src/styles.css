@@ -1,6 +1,8 @@
 /* This is the entire page */
 body {
-	background-color: #393C59; 
+	/*background-color: #393C59;*/
+	background-image: url('gifs/Showers2.gif');
+	background-size: cover;
 }
 
 /* This is the heading font */
