@@ -33,10 +33,24 @@ export class AppComponent implements OnInit {
     }*/
   }
 
+  lookupAddressOnGoogle(searchTerm: string) {
+    searchTerm.replace(' ', '+');
+    let key = 'AIzaSyDJn2Xy60RsDcuC1YDydzkBlzIME7SWCYc';
+
+    this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + searchTerm + '&key=' + key)
+      .subscribe((json: any) => {
+        if (json.results.length != 0) { //If there are no results then the address is invalid.
+          console.log(json.results);
+        } else {
+          alert("Invalid address. Please try again");
+        }
+      });
+  }
+
   ngOnInit() {
     let btn = document.getElementById('locationSearchButton');
     btn.addEventListener("click", () => {
-      this.locateByCoordinates();
+      this.lookupAddressOnGoogle("1131 S. College St.");
     });
     //this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9' +
       //'c4b29b11/37.8267,-122.4233').subscribe(data => {
