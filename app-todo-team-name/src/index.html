@@ -7,21 +7,12 @@
   <!--CSS File Link-->
   <link rel="stylesheet" href="styles.css">
   <style>
-	<!-- Tool Bar -->
+	<!-- Navigation Bar Start -->
 	* {box-sizing: border-box;}
-	
-	<!--.myVideo {
-		position: fixed;
-		right: 0;
-		bottom: 0;
-		min-width: 100%;
-		min-height: 100%;
-	}-->
-	
 
-	.topnav {
+	div.topnav {
 		overflow: hidden;
-		background-color: #e9e9e9;
+		background-color: #0000007F;
 	}
 
 	.topnav a {
@@ -32,6 +23,7 @@
 		padding: 14px 16px;
 		text-decoration: none;
 		font-size: 17px;
+		font-weight: bold;
 	}
 
 	.topnav a:hover {
@@ -88,20 +80,20 @@
 			border: 1px solid #ccc;
 		}
 	}
+	
+	<!-- Navigation Bar End -->
 
-	<!-- Current Weather Box -->
-	div.background {
+	<!-- Current Weather Box Start -->
+	div.backgroundBox {
 		background-color: #ffffff;
 		border: 2px solid black;
 	}
 
 	div.transbox {
-		margin: auto;
-		width: 50%;
+		margin: 40px;
+		width: 95%;
 		background-color: #ffffff;
 		border: 1px solid black;
-		opacity 0.6;
-		filter: alpha(opacity = 60);
 	}
 
 	div.transbox p	{
@@ -109,25 +101,37 @@
 		font-weight: bold;
 		color: #000000;
 	}
+	<!-- Current Weather Box End -->
+	
   </style>
 
 </head>
-<body onload = displayClock();>
-	<!--<div style="position: fixed; z-index: -99; width: 100%; height: 100%">
-		<iframe width="100%" height="100%" 
-			src="https://www.youtube.com/embed/BIzjbEG3EQs?autoplay=1&controls=0&loop=1&rel=0&showinfo=0&playlist=BIzjbEG3EQs" frameborder="0">
-		</iframe>
-	</div>-->
+<body onload = displayClock() changeNav();>
 	<div class="topnav">
+		<!-- Change Navigation Bar Based On Time -->
+		<script type="text/javascript">
+			function changeNav() {
+				var currentTime = new Date().getHours();
+				if (0 <= currentTime && currentTime < 4) {
+					document.getElementById("topnav").style.backgroundColor = "yellow";
+				}
+	
+				else if (13 <= currentTime && currentTime < 16) {
+					document.getElementById("topnav").style.backgroundColor = "yellow";
+				}
+			}
+		</script>
 		<a href="#home">Home</a>
 		<!-- Date -->
 		<a id="date"></a>
 		<script>
+			<!-- Refreshes clock every minute -->
 			function clockRefresh() {
 				var refresh = 1000;
 				myTime = setTimeout('displayClock()', refresh)
 			}
 			
+			<!-- Clock Display Format -->
 			function displayClock() {
 				var n = new Date()
 				var hh = n.getHours();
@@ -141,32 +145,79 @@
 				if (h == 0) {
 					h = 12;
 				}
-				var d = (("0" + h).slice(-2)) + ":" + (("0" + n.getMinutes()).slice(-2)) + dd + " " + (("0" + (n.getMonth() + 1)).slice(-2)) + "/" + (("0" + n.getDate()).slice(-2)) + "/" + n.getFullYear();
+				var d = (("0" + h).slice(-2)) + ":" + (("0" + n.getMinutes()).slice(-2)) + dd + " \n" + (("0" + (n.getMonth() + 1)).slice(-2)) + "/" + (("0" + n.getDate()).slice(-2)) + "/" + n.getFullYear();
 				document.getElementById("date").innerHTML = d;
 				clockRefresh();
-			}
-			
-			<!--document.getElementById("date").innerHTML = (("0" + h).slice(-2)) + ":" + (("0" + n.getMinutes()).slice(-2)) + dd + " " + (("0" + m).slice(-2)) + "/" + (("0" + d).slice(-2)) + "/" + y;-->
+			}			
 		</script>
 		<!-- Location Bar -->
 		<div class="search-container">
-			<!-- Action should be the location search -->
-			<form>
-				<!--<input type="text" placeholder="Please Enter Location..." name="location" id="userInput">
-				<button type="submit" id="locationSearchButton">Submit</button>-->
-			<!-- Try adding a refresh, or having the function store the name then call aa new function -->
-			</form>
-      <input type="text" placeholder="Please Enter Location..." name="location" id="userInput">
-      <button id="locationSearchButton">Submit</button>
+			<input type="text" placeholder="Please Enter Location..." name="location" id="userInput">
+			<button id="locationSearchButton">Submit</button>
 		</div>
 	</div>
 
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-	<div class="background">
+	<!-- Current Weather -->
+	<div class="backgroundBox">
 		<div class="transbox">
-			<script type="text/javascript" src="https://darksky.net/widget/default-small/42.360082,-71.05888/us12/en.js?width=undefined&height=70&title=Full Forecast&textColor=333333&bgColor=FFFFFF&skyColor=333&fontFamily=Default&customFont=&units=us"></script>
+			<h1><center>Current Weather</center></h1>
+			<!--<script type="text/javascript" src="https://darksky.net/widget/default-small/42.360082,-71.05888/us12/en.js?width=undefined&height=70&title=Full Forecast&textColor=333333&bgColor=FFFFFF&skyColor=333&fontFamily=Default&customFont=&units=us"></script>-->
 		</div>
 	</div>
+	
+	<!-- Minute By Minute -->
+	<div class="backgroundBox">
+		<div class="transbox">
+			<h1><center>Minute-By-Minute</center></h1>
+		</div>
+	</div>
+	
+	<!-- Hour By Hour -->
+	<div class="backgroundBox">
+		<div class="transbox">
+			<h1><center>Hour-By-Hour</center></h1>
+		</div>
+	</div>
+	<!-- Time Machine Label -->
+	<div class="backgroundBox">
+		<div class="transbox">
+			<h1><center>Time Machine</center></h1>
+			<div class="transbox">
+				One Day Ago
+			</div>
+			<div class="transbox">
+				One Month Ago
+			</div>
+			<div class="transbox">
+				One Year Ago
+			</div>
+			<div class="transbox">
+				Ten Years
+				<p style="text-align:right;">Please Select A Year
+				<select>
+					<option value="2017">2017</option>
+					<option value="2016">2016</option>
+					<option value="2015">2015</option>
+					<option value="2014">2014</option>
+					<option value="2013">2013</option>
+					<option value="2012">2012</option>
+					<option value="2011">2011</option>
+					<option value="2010">2010</option>
+					<option value="2009">2009</option>
+					<option value="2008">2008</option>
+				</select>
+				</p>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Days Ago -->
+	
+	<!-- Months Ago -->
+	
+	<!-- Years Ago -->
+	
 </body>
 </html>
