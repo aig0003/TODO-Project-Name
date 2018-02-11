@@ -49,7 +49,8 @@ export class AppComponent implements OnInit {
   printWeatherData(weatherJSON:any) {
 	if(weatherJSON.daily.data[0].icon == "rain") {
 		<HTMLElement>document.body.style.backgroundImage = 'url("gifs/Raining_sm.gif")';
-	} else {
+	} 
+	else {
 		document.body.style.backgroundImage = 'url("file:///PATH-TO/Raining_sm.gif")';
 	}
 	
