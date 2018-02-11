@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+  currentCoords:any;
 
   constructor(private http: HttpClient) {
   }
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 	this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9c4b29b11/' + jsonData.lat + ',' + jsonData.lng)
       .subscribe((json: any) => {
 		  console.log(json);
+		  this.currentCoords = jsonData;
 		  this.printWeatherData(json);
       });
 
@@ -25,6 +26,20 @@ export class AppComponent implements OnInit {
 
   lookupAddressOnGoogle(userInput: HTMLInputElement){
     var searchTerm = userInput.value;
+    //Wipe all the html fields.
+    document.getElementById("weekAtGlanceField").innerHTML = "";
+    document.getElementById("minuteByMinuteField").innerHTML = "";
+    document.getElementById("hourByHourField").innerHTML = "";
+    document.getElementById("hourByHourTempField").innerHTML = "";
+    document.getElementById("oneDayAgoPrecip").innerHTML = "";
+    document.getElementById("oneDayAgoTemp").innerHTML = "";
+    document.getElementById("oneMonthAgoPrecip").innerHTML = "";
+    document.getElementById("oneMonthAgoTemp").innerHTML = "";
+    document.getElementById("oneYearAgoPrecip").innerHTML = "";
+    document.getElementById("oneYearAgoTemp").innerHTML = "";
+    document.getElementById('multiYearAgoPrecip').innerHTML = "";
+    document.getElementById('multiYearAgoTemp').innerHTML = "";
+
     searchTerm.replace(' ', '+');
     let key = 'AIzaSyDJn2Xy60RsDcuC1YDydzkBlzIME7SWCYc';
 
@@ -217,13 +232,13 @@ export class AppComponent implements OnInit {
 		" The high is " + weatherJSON.daily.data[7].temperatureHigh + " and the low is " + weatherJSON.daily.data[7].temperatureLow + ".</h4></center>";
   }
 
-  useTimeMachine(warpJSON:any, date:number, editthis:HTMLElement, editthis2:HTMLElement) {
+  useTimeMachine(warpJSON:any, date:any, editthis:HTMLElement, editthis2:HTMLElement) {
 	  this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9c4b29b11/' + warpJSON.lat + ',' + warpJSON.lng + ',' + date)
       .subscribe((json: any) => {
 		  console.log(json);
 		  //insert some math here
 		  editthis.innerHTML = "<center><i> Hourly Forecast for this day in history: </center></i>";
-		  editthis.innerHTML += '<br><br><canvas id="hourPrecipGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+		  editthis.innerHTML += '<br><br><canvas id="hourPrecipGraph" width="1150" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
         '    padding-right: 0;\n' +
         '    margin-left: auto;\n' +
         '    margin-right: auto;\n' +
@@ -231,25 +246,29 @@ export class AppComponent implements OnInit {
         '    width: 800px;"></canvas><br>\n';
 		  let oldGraph = <HTMLCanvasElement>document.getElementById('hourPrecipGraph');
 
-          let oldCtx = hourGraph.getContext("2d");
+          let oldCtx = oldGraph.getContext("2d");
 
           //Adds a gradient for the graph.
           var oldGrd=oldCtx.createLinearGradient(0,220,0,0);
           oldGrd.addColorStop(0,"cyan");
           oldGrd.addColorStop(1,"grey");
-          oldCtx.fillStyle=hourGrd;
+          oldCtx.fillStyle=oldGrd;
           oldCtx.fillRect(0,0,1200,220);
 
           oldCtx.moveTo(0,0);
-          for (var i = 0; i < warpJSON.hourly.data.length; i++)
+          for (var i = 0; i < json.hourly.data.length; i++)
           {
-            oldCtx.lineTo(i*25, 220 - (warpJSON.hourly.data[i].precipProbability * 200));
-            oldCtx.stroke();
+            oldCtx.lineTo(i*50, 220 - (json.hourly.data[i].precipProbability * 200));
+            oldCtx.stroke()
+            if (i%4 ==0) {
+              oldCtx.font = "20px Arial";
+              oldCtx.strokeText(Math.round(json.hourly.data[i].precipProbability * 100) + "%",i * 50, 100);
+            }
           }
-		  
+
 		  //Hourly summary of temperature with graph.
-			editthis2.innerHTML  += "<br><br><center><i>Hourly Temperature Breakdown: <br>High of " + warpJSON.daily.data[0].temperatureHigh + ". <br>Low of " + warpJSON.daily.data[0].temperatureLow + ".</i></center>";
-			editthis2.innerHTML += '<br><br><canvas id="hourEditGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+			editthis2.innerHTML  += "<br><br><center><i>Hourly Temperature Breakdown: <br>High of " + json.daily.data[0].temperatureHigh + ". <br>Low of " + json.daily.data[0].temperatureLow + ".</i></center>";
+			editthis2.innerHTML += '<br><br><canvas id="hourEditGraph" width="1150" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
 		'    padding-right: 0;\n' +
         '    margin-left: auto;\n' +
         '    margin-right: auto;\n' +
@@ -263,17 +282,17 @@ export class AppComponent implements OnInit {
 			var hourEditGrd=hourEditCtx.createLinearGradient(0,220,0,0);
 			hourEditGrd.addColorStop(0,"red");
 			hourEditGrd.addColorStop(1,"grey");
-			hourEditCtx.fillStyle=hourTempGrd;
+			hourEditCtx.fillStyle=hourEditGrd;
 			hourEditCtx.fillRect(0,0,1200,220);
 
 			hourEditCtx.moveTo(0,0);
-			for (var i = 0; i < warpJSON.hourly.data.length; i++)
+			for (var i = 0; i < json.hourly.data.length; i++)
 			{
-				hourEditCtx.lineTo(i*25, 200 - (warpJSON.hourly.data[i].temperature) * 1.5);
+				hourEditCtx.lineTo(i*50, 200 - (json.hourly.data[i].temperature) * 1.5);
 				hourEditCtx.stroke();
 				if (i%4 ==0) {
 				hourEditCtx.font = "20px Arial";
-				hourEditCtx.strokeText(warpJSON.hourly.data[i].temperature,i * 25, 220 - warpJSON.hourly.data[i].temperature - 12);
+				hourEditCtx.strokeText(json.hourly.data[i].temperature,i * 50, 220 - json.hourly.data[i].temperature - 12);
 				}
 			}
 
@@ -291,10 +310,85 @@ export class AppComponent implements OnInit {
         alert("Please enter a search term");
       }
     });
-    //this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9' +
-      //'c4b29b11/37.8267,-122.4233').subscribe(data => {
-      //console.log(data);
-    //});
+
+    //Time Machine Buttons
+    let todayDate = new Date();
+    let tempDate = new Date();
+    let tempString = "";
+    let oneDayAgoButton = document.getElementById('oneDayAgoButton');
+    oneDayAgoButton.addEventListener("click", () => {
+      tempDate = todayDate;
+      tempString = "";
+      tempDate.setDate(todayDate.getDate() - 1);
+      console.log(tempDate.getTime());
+      document.getElementById('oneDayAgoPrecip').innerHTML = "";
+      document.getElementById('oneDayAgoTemp').innerHTML = "";
+      document.getElementById('oneMonthAgoPrecip').innerHTML = "";
+      document.getElementById('oneMonthAgoTemp').innerHTML = "";
+      document.getElementById('oneYearAgoPrecip').innerHTML = "";
+      document.getElementById('oneYearAgoTemp').innerHTML = "";
+      document.getElementById('multiYearAgoPrecip').innerHTML = "";
+      document.getElementById('multiYearAgoTemp').innerHTML = "";
+      tempString = tempDate.getTime().toString();
+      tempString = tempString.substring(0, tempString.length - 3);
+      this.useTimeMachine(this.currentCoords, tempString, document.getElementById('oneDayAgoPrecip'), document.getElementById('oneDayAgoTemp'));
+    });
+    let oneMonthAgoButton = document.getElementById('oneMonthAgoButton');
+    oneMonthAgoButton.addEventListener("click", () => {
+      tempDate = todayDate;
+      tempString = "";
+      tempDate.setMonth(todayDate.getMonth() - 1);
+      document.getElementById('oneDayAgoPrecip').innerHTML = "";
+      document.getElementById('oneDayAgoTemp').innerHTML = "";
+      document.getElementById('oneMonthAgoPrecip').innerHTML = "";
+      document.getElementById('oneMonthAgoTemp').innerHTML = "";
+      document.getElementById('oneYearAgoPrecip').innerHTML = "";
+      document.getElementById('oneYearAgoTemp').innerHTML = "";
+      document.getElementById('multiYearAgoPrecip').innerHTML = "";
+      document.getElementById('multiYearAgoTemp').innerHTML = "";
+      tempString = tempDate.getTime().toString();
+      tempString = tempString.substring(0, tempString.length - 3);
+      this.useTimeMachine(this.currentCoords, tempString, document.getElementById('oneMonthAgoPrecip'), document.getElementById('oneMonthAgoTemp'));
+    });
+    let oneYearAgoButton = document.getElementById('oneYearAgoButton');
+    oneYearAgoButton.addEventListener("click", () => {
+      tempDate = todayDate;
+      tempString = "";
+      tempDate.setFullYear(todayDate.getFullYear() - 1);
+      document.getElementById('oneDayAgoPrecip').innerHTML = "";
+      document.getElementById('oneDayAgoTemp').innerHTML = "";
+      document.getElementById('oneMonthAgoPrecip').innerHTML = "";
+      document.getElementById('oneMonthAgoTemp').innerHTML = "";
+      document.getElementById('oneYearAgoPrecip').innerHTML = "";
+      document.getElementById('oneYearAgoTemp').innerHTML = "";
+      document.getElementById('multiYearAgoPrecip').innerHTML = "";
+      document.getElementById('multiYearAgoTemp').innerHTML = "";
+      tempString = tempDate.getTime().toString();
+      tempString = tempString.substring(0, tempString.length - 3);
+      this.useTimeMachine(this.currentCoords, tempString, document.getElementById('oneYearAgoPrecip'), document.getElementById('oneYearAgoTemp'));
+    });
+    let multiYearAgoButton = document.getElementById('multiYearAgoButton');
+    multiYearAgoButton.addEventListener("click", () => {
+      tempDate = todayDate;
+      tempString = "";
+      let selectorValue = <HTMLSelectElement>document.getElementById('yearSelect');
+      let offset = selectorValue.selectedIndex + 1;
+      tempDate.setFullYear(todayDate.getFullYear() - offset);
+      document.getElementById('oneDayAgoPrecip').innerHTML = "";
+      document.getElementById('oneDayAgoTemp').innerHTML = "";
+      document.getElementById('oneMonthAgoPrecip').innerHTML = "";
+      document.getElementById('oneMonthAgoTemp').innerHTML = "";
+      document.getElementById('oneYearAgoPrecip').innerHTML = "";
+      document.getElementById('oneYearAgoTemp').innerHTML = "";
+      document.getElementById('multiYearAgoPrecip').innerHTML = "";
+      document.getElementById('multiYearAgoTemp').innerHTML = "";
+      tempString = tempDate.getTime().toString();
+      tempString = tempString.substring(0, tempString.length - 3);
+      this.useTimeMachine(this.currentCoords, tempString, document.getElementById('multiYearAgoPrecip'), document.getElementById('multiYearAgoTemp'));
+    });
+
+
+
     /**
      * Returned JSON is formatted like this:
      * {

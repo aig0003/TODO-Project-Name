@@ -1,6 +1,6 @@
 /* This is the entire page */
 body {
-	background-color: #393C59;
+	background-color: #2f3da4;
 	background-image: url('gifs/PartlySunny_sm.gif');
 	background-size: 100% auto;
 	background-repeat: no-repeat;
@@ -23,17 +23,13 @@ body {
 	.topnav a {
 		float: left;
 		display: block;
-		color: black;
+		color: white;
+		font-family: Helvetica, Verdana, Times;
 		text-align: center;
 		padding: 14px 16px;
 		text-decoration: none;
 		font-size: 17px;
 		font-weight: bold;
-	}
-
-	.topnav a:hover {
-		background-color: #ddd;
-		color: black;
 	}
 
 	.topnav a:article {
@@ -85,48 +81,19 @@ body {
 			border: 1px solid #ccc;
 		}
 	}
-	
-	/*Navigation Bar End*/
-/**
-	if(currentWeather == rain) {
-		bgimage = "gifs/Raining_sm.gif";
-	}
-	else if (currentWeather == rain) {
-		bgimage =
-	}
-	else if (currentWeather == rain) {
-		bgimage =
-	}
-	else if () {
-		bgimage =
-	}
-	else if () {
-		bgimage =
-	}
-	else if () {
-		bgimage =
-	}
-	else if () {
-		bgimage =
-	}
-	else {
-		bgimage =  
-	}
-*/
-
-
 
 /* This is the heading font */
 h1 {
-	/*color: insert here;*/
-	/*font-family: insert here;*/
+	color: white;
+	font-family: Helvetica;
+	text-align: left;
 	/*font-size: insert here;*/
 }
 
 /* This is the paragraph font.*/
 p	{
-	/*color: insert here;*/
-	/*font-family: insert here;*/
+	color: white;
+	font-family: Helvetica;
 	/*font-size: insert here;*/
 	/*border: 1px solid *color*; */
 	/*padding: 30px; space between text and border*/
