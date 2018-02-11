@@ -7,10 +7,7 @@
   <!--CSS File Link-->
   <link rel="stylesheet" href="styles.css">
   <style>
-	<!-- Navigation Bar Start -->
 	* {box-sizing: border-box;}
-
-	<!-- Navigation Bar End -->
 
 	<!-- Current Weather Box Start -->
 	div.backgroundBox {
@@ -35,19 +32,38 @@
   </style>
 
 </head>
-<body onload = displayClock() changeNav();>
+<body onload = displayClock();>
 	<div class="topnav">
-		<!-- Change Navigation Bar Based On Time -->
 		<script>
 			function changeNav() {
-				var currentTime = new Date().getHours();
-
-				if (0 <= currentTime && currentTime < 4) {
-					document.getElementById("topnav").style.backgroundColor = "yellow";
+				var currentTime = new Date().getSeconds();
+				
+				if (0 <= currentTime && currentTime < 10) {
+					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#4E82ADAF";
 				}
-
-				else if (13 <= currentTime && currentTime < 24) {
-					document.getElementById("topnav").style.backgroundColor = "#000000";
+	
+				else if (10 <= currentTime && currentTime < 20) {
+					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#EBC248AF";
+				}
+				
+				else if (20 <= currentTime && currentTime < 30) {
+					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#E6963DAF";
+				}
+				
+				else if (30 <= currentTime && currentTime < 40) {
+					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#F64D02AF";
+				}
+				
+				else if (40 <= currentTime && currentTime < 50) {
+					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#6D3755AF";
+				}
+				
+				else if (50 <= currentTime && currentTime < 60) {
+					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#1E1A53AF";
+				}
+				
+				else {
+					<!-- Leave As Default -->
 				}
 			}
 		</script>
@@ -59,6 +75,7 @@
 			function clockRefresh() {
 				var refresh = 1000;
 				myTime = setTimeout('displayClock()', refresh)
+				changeNav();
 			}
 
 			<!-- Clock Display Format -->
@@ -106,7 +123,7 @@
 			<div id="currentWeatherDataField">
 				<script>
 					function changeBackground() {
-						var weatherData = document.getElementByID("currentWeatherDataField").innerHTML;
+						var weatherData = document.getElementById("currentWeatherDataField").innerHTML;
 						if (weatherData.indexOf('rain') >= 0) {
 							document.body.style.backgroundImage = url('gifs/Raining_sm.gif');
 						}
@@ -166,6 +183,7 @@
 		<div class="transbox">
 			<h1><center>Hour-By-Hour</center></h1>
       <div id="hourByHourField"></div>
+      <div id="hourByHourTempField"></div>
 		</div>
 	</div>
 
@@ -215,4 +233,16 @@
 	<!-- Years Ago -->
 
 </body>
+
+<footer>
+	<div class="sponsor">
+		<a href="https://darksky.net">
+			<img src="https://darksky.net/dev/img/attribution/poweredby-oneline-darkbackground.png" height = "40px" width="250px" alt="Powered By DarkSky.net">
+		</a>
+		
+		<a href="https://google.com">
+			<img src="https://developers.google.com/places/documentation/images/powered-by-google-on-non-white.png" alt="Powered By Google.com" height="25px">
+		</a>
+	</div>
+</footer>
 </html>
