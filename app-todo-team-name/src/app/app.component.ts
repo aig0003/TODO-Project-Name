@@ -84,7 +84,7 @@ export class AppComponent implements OnInit {
         ctx.stroke();
         if (i%5 ==0) {
           ctx.font = "20px Arial";
-          ctx.strokeText(Math.round(weatherJSON.minutely.data[i].precipProbability * 200) + "%",i * 25 + 2, 100);
+          ctx.strokeText(Math.round(weatherJSON.minutely.data[i].precipProbability * 100) + "%",i * 25 + 2, 100);
         }
       }
 
@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
         hourCtx.stroke();
         if (i%4 ==0) {
           hourCtx.font = "20px Arial";
-          hourCtx.strokeText(Math.round(weatherJSON.hourly.data[i].precipProbability * 200) + "%",i * 25 + 2, 100);
+          hourCtx.strokeText(Math.round(weatherJSON.hourly.data[i].precipProbability * 100) + "%",i * 25 + 2, 100);
         }
       }
 
