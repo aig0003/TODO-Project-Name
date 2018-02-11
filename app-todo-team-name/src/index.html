@@ -38,15 +38,16 @@
 <body onload = displayClock() changeNav();>
 	<div class="topnav">
 		<!-- Change Navigation Bar Based On Time -->
-		<script type="text/javascript">
+		<script>
 			function changeNav() {
 				var currentTime = new Date().getHours();
+				
 				if (0 <= currentTime && currentTime < 4) {
 					document.getElementById("topnav").style.backgroundColor = "yellow";
 				}
 
-				else if (13 <= currentTime && currentTime < 16) {
-					document.getElementById("topnav").style.backgroundColor = "yellow";
+				else if (13 <= currentTime && currentTime < 24) {
+					document.getElementById("topnav").style.backgroundColor = "#000000";
 				}
 			}
 		</script>
@@ -101,9 +102,25 @@
 		<div class="transbox">
 			<h1>
 			<center>Current Weather</center>
-			<div id="currentWeatherDataField"></div>
+			<div id="currentWeatherDataField">
+				<script>
+					function changeBackground() {
+						var weatherData = document.getElementByID("currentWeatherDataField").innerHTML;
+						if (weatherData.indexOf('rain') >= 0) {
+							
+						}
+						
+						else if (weatherData.indexOf('sun') >= 0) {
+						
+						}
+						
+						else if (weatherDAta.indexOf('storm') >= 0) {
+						
+						}
+					}
+				</script>
+			</div>
 			</h1>
-			<!--<script type="text/javascript" src="https://darksky.net/widget/default-small/42.360082,-71.05888/us12/en.js?width=undefined&height=70&title=Full Forecast&textColor=333333&bgColor=FFFFFF&skyColor=333&fontFamily=Default&customFont=&units=us"></script>-->
 		</div>
 	</div>
   <app-root></app-root> <!--this line is important-->
