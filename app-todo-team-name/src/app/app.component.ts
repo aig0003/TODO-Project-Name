@@ -14,17 +14,11 @@ export class AppComponent implements OnInit {
   }
 
   locateByCoordinates(jsonData:any) {
-	console.log(jsonData);
-	console.log(jsonData.lng);
     console.log("Run test function");
 	this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9c4b29b11/' + jsonData.lat + ',' + jsonData.lng)
       .subscribe((json: any) => {
 		  console.log(json);
-        /*if (json.results.length != 0) { //If there are no results then the address is invalid.
-          console.log(json.results);
-        } else {
-          alert("Invalid address. Please try again");
-        }*/
+		  this.printWeatherData(json);
       });
   }
 
@@ -37,18 +31,12 @@ export class AppComponent implements OnInit {
       .subscribe((json: any) => {
         console.log(json);
         if (json.results.length != 0) { //If there are no results then the address is invalid.
-          /**if (json.results.length > 1) { //There are more than one responses. Returns the first one as it is more common.
-            alert("There were more than one results for this search. If the data is incorrect, consider being more specific.");
-          }*/
           var location = json.results[0]; //Defaults to first one.
-          console.log("Coordinates: ");
-          console.log(location.geometry.location);
         } else {
           alert("Invalid address. Please try again");
         }
-        console.log("About to return");
         this.printLocationData(json);
-        console.log("Is this reached?");
+        this.locateByCoordinates(location.geometry.location);
       });
   }
 
@@ -58,9 +46,43 @@ export class AppComponent implements OnInit {
   }
 
   printWeatherData(weatherJSON:any) {
+    //Does the current weather summary
     let weatherField = <HTMLElement>document.getElementById('currentWeatherDataField');
-    weatherField.innerHTML = "Here is some weather";
+    weatherField.innerHTML = 'SUMMARY: ' + weatherJSON.daily.summary;
+
+    //Does the minute by minute summary
+    let minField = <HTMLElement>document.getElementById('minuteByMinuteField');
+    minField.innerHTML  = "<center><i>Forecast for the next hour: " + weatherJSON.minutely.summary + "</i></center>";
+    minField.innerHTML += '<br><br><canvas id="precipChanceGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+      '    padding-right: 0;\n' +
+      '    margin-left: auto;\n' +
+      '    margin-right: auto;\n' +
+      '    display: block;\n' +
+      '    width: 800px;"></canvas><br>\n';
+    let graph = <HTMLCanvasElement>document.getElementById('precipChanceGraph');
+
+    let ctx = graph.getContext("2d");
+
+    //Adds a gradient for the graph.
+    var grd=ctx.createLinearGradient(0,220,0,0);
+    grd.addColorStop(0,"cyan");
+    grd.addColorStop(1,"grey");
+    ctx.fillStyle=grd;
+    ctx.fillRect(0,0,1200,220);
+
+    ctx.moveTo(0,0);
+    for (var i = 0; i < weatherJSON.minutely.data.length; i++)
+    {
+      ctx.lineTo(i*20, 220 - (weatherJSON.minutely.data[i].precipProbability * 200));
+      ctx.stroke();
+    }
   }
+
+  printTimeMachine(oldJSON:any) {
+
+  }
+
+
 
   ngOnInit() {
     let btn = document.getElementById('locationSearchButton');
