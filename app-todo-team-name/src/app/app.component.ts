@@ -95,11 +95,15 @@ export class AppComponent implements OnInit {
 
 	}
 	
-	else if(weatherJSON.currently.icon == "cloudy-day") {
+	else if(weatherJSON.currently.icon == "cloudy") {
 		//Leaving as original.
 	}
 	
-	else if(weatherJSON.currently.icon == "cloudy-night") {
+	else if(weatherJSON.currently.icon == "partly-cloudy-day") {
+		//Leaving as original.
+	}
+	
+	else if(weatherJSON.currently.icon == "partly-cloudy-night") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/9U0RB30SGQtjO/giphy.gif')";
 
 	}
