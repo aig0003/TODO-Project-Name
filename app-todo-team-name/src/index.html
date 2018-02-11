@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AppTodoTeamName</title>
+  <link rel="shorcut icon" href="app-todo-team-name/Icons/Cloud_Snow_Rain_Night.svg">
+  <title>//TODO: Weather App</title>
   <base href="/">
   <!--CSS File Link-->
   <link rel="stylesheet" href="styles.css">
@@ -16,16 +17,21 @@
 	}
 
 	div.transbox {
-		margin: 40px;
-		width: 95%;
-		background-color: #ffffff;
-		border: 1px solid black;
+		margin-left: 5px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		width: 98%;
+		background-color: #CCCCCC7F;
+		border: 1px solid white;
+		/*border-top-left-radius: 25px;*/
+		border-top-color:;
+		border-left: 5px solid white;
+		border-bottom-right-radius: 25px;
 	}
 
 	div.transbox p	{
 		margin: 5%;
 		font-weight: bold;
-		color: #000000;
 	}
 	<!-- Current Weather Box End -->
 
@@ -36,38 +42,38 @@
 	<div class="topnav">
 		<script>
 			function changeNav() {
-				var currentTime = new Date().getSeconds();
-
-				if (0 <= currentTime && currentTime < 10) {
+				var currentTime = new Date().getHours();
+				
+				if (4 <= currentTime && currentTime < 6) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#4E82ADAF";
 				}
-
-				else if (10 <= currentTime && currentTime < 20) {
+	
+				else if (6 <= currentTime && currentTime < 11) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#EBC248AF";
 				}
-
-				else if (20 <= currentTime && currentTime < 30) {
+				
+				else if (11 <= currentTime && currentTime < 13) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#E6963DAF";
 				}
-
-				else if (30 <= currentTime && currentTime < 40) {
+				
+				else if (13 <= currentTime && currentTime < 16) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#F64D02AF";
 				}
-
-				else if (40 <= currentTime && currentTime < 50) {
+				
+				else if (16 <= currentTime && currentTime < 20) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#6D3755AF";
 				}
-
-				else if (50 <= currentTime && currentTime < 60) {
+				
+				else if (20 <= currentTime && currentTime < 24) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#1E1A53AF";
 				}
 
 				else {
-					<!-- Leave As Default -->
+					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#1E1A53AF";
 				}
 			}
 		</script>
-		<a href="#home">Home</a>
+		<a>//TODO: Weather App</a>
 		<!-- Date -->
 		<a id="date"></a>
 		<script>
@@ -101,6 +107,16 @@
 		<div class="search-container">
 			<input type="text" placeholder="Please Enter Location..." name="location" id="locationSearchBox">
 			<button id="locationSearchButton">Submit</button>
+			
+			<script>
+			var input = document.getElementById("text");
+			input.addEventListener("keyup", function(event) {
+			event.preventDefault();
+			if (event.keyCode === 13) {
+			document.getElementById("locationSearchButton").click();
+		}
+		});
+		</script>
 		</div>
 	</div>
 
@@ -242,7 +258,7 @@
 <footer>
 	<div class="sponsor">
 		<a href="https://darksky.net">
-			<img src="https://darksky.net/dev/img/attribution/poweredby-oneline-darkbackground.png" height = "40px" width="250px" alt="Powered By DarkSky.net">
+			<img src="https://darksky.net/dev/img/attribution/poweredby-oneline-darkbackground.png" height = "50px" width="250px" alt="Powered By DarkSky.net">
 		</a>
 
 		<a href="https://google.com">
