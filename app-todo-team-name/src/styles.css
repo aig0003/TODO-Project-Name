@@ -4,7 +4,13 @@ body {
 	background-image: url('gifs/PartlySunny_sm.gif');
 	background-size: cover;
 	margin: 0px;
-}
+}	
+	/* Foooter */
+	.sponsor {
+		display: inline-box;
+		height: auto;
+	}
+
 	/*Navigation Bar Start	*/
 	
 	.topnav {
