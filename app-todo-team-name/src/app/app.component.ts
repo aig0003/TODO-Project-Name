@@ -82,6 +82,10 @@ export class AppComponent implements OnInit {
       {
         ctx.lineTo(i*20, 220 - (weatherJSON.minutely.data[i].precipProbability * 200));
         ctx.stroke();
+        if (i%5 ==0) {
+          ctx.font = "20px Arial";
+          ctx.strokeText(Math.round(weatherJSON.minutely.data[i].precipProbability * 200) + "%",i * 25 + 2, 220 - weatherJSON.minutely.data[i].precipProbability * 200 - 60);
+        }
       }
 
     //Starts the hour by hour summary.
@@ -109,6 +113,10 @@ export class AppComponent implements OnInit {
       {
         hourCtx.lineTo(i*25, 220 - (weatherJSON.hourly.data[i].precipProbability * 200));
         hourCtx.stroke();
+        if (i%4 ==0) {
+          hourCtx.font = "20px Arial";
+          hourCtx.strokeText(Math.round(weatherJSON.hourly.data[i].precipProbability * 200) + "%",i * 25 + 2, 220 - weatherJSON.hourly.data[i].precipProbability * 200 - 60);
+        }
       }
 
       //Hourly summary of temperature with graph.
@@ -145,21 +153,21 @@ export class AppComponent implements OnInit {
     //Creates a summary of the whole week.
       let dailyField = <HTMLElement>document.getElementById('weekAtGlanceField');
       dailyField.innerHTML = "<center><i>Your week at a glance: " + weatherJSON.daily.summary + "</i></center>";
-      dailyField.innerHTML += "<center><h4>Today: " + weatherJSON.daily.data[0].summary + 
+      dailyField.innerHTML += "<center><h4>Today: " + weatherJSON.daily.data[0].summary +
 		" The high is " + weatherJSON.daily.data[0].temperatureHigh + " and the low is " + weatherJSON.daily.data[0].temperatureLow + ".</h4></center>";
-      dailyField.innerHTML += "<center><h4>Tomorrow: " + weatherJSON.daily.data[1].summary + 
+      dailyField.innerHTML += "<center><h4>Tomorrow: " + weatherJSON.daily.data[1].summary +
 		" The high is " + weatherJSON.daily.data[1].temperatureHigh + " and the low is " + weatherJSON.daily.data[1].temperatureLow + ".</h4></center>";
-      dailyField.innerHTML += "<center><h4>2 Days: " + weatherJSON.daily.data[2].summary + 
+      dailyField.innerHTML += "<center><h4>2 Days: " + weatherJSON.daily.data[2].summary +
 		" The high is " + weatherJSON.daily.data[2].temperatureHigh + " and the low is " + weatherJSON.daily.data[2].temperatureLow + ".</h4></center>";
-      dailyField.innerHTML += "<center><h4>3 Days: " + weatherJSON.daily.data[3].summary + 
+      dailyField.innerHTML += "<center><h4>3 Days: " + weatherJSON.daily.data[3].summary +
 		" The high is " + weatherJSON.daily.data[3].temperatureHigh + " and the low is " + weatherJSON.daily.data[3].temperatureLow + ".</h4></center>";
-      dailyField.innerHTML += "<center><h4>4 Days: " + weatherJSON.daily.data[4].summary + 
+      dailyField.innerHTML += "<center><h4>4 Days: " + weatherJSON.daily.data[4].summary +
 		" The high is " + weatherJSON.daily.data[4].temperatureHigh + " and the low is " + weatherJSON.daily.data[4].temperatureLow + ".</h4></center>";
-      dailyField.innerHTML += "<center><h4>5 Days: " + weatherJSON.daily.data[5].summary + 
+      dailyField.innerHTML += "<center><h4>5 Days: " + weatherJSON.daily.data[5].summary +
 		" The high is " + weatherJSON.daily.data[5].temperatureHigh + " and the low is " + weatherJSON.daily.data[5].temperatureLow + ".</h4></center>";
-      dailyField.innerHTML += "<center><h4>6 Days: " + weatherJSON.daily.data[6].summary + 
+      dailyField.innerHTML += "<center><h4>6 Days: " + weatherJSON.daily.data[6].summary +
 		" The high is " + weatherJSON.daily.data[6].temperatureHigh + " and the low is " + weatherJSON.daily.data[6].temperatureLow + ".</h4></center>";
-      dailyField.innerHTML += "<center><h4>7 Days: " + weatherJSON.daily.data[7].summary + 
+      dailyField.innerHTML += "<center><h4>7 Days: " + weatherJSON.daily.data[7].summary +
 		" The high is " + weatherJSON.daily.data[7].temperatureHigh + " and the low is " + weatherJSON.daily.data[7].temperatureLow + ".</h4></center>";
   }
 
