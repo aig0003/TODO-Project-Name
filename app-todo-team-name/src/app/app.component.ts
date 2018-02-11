@@ -48,15 +48,60 @@ export class AppComponent implements OnInit {
 
   printWeatherData(weatherJSON:any) {
 	if(weatherJSON.daily.data[0].icon == "rain") {
-		document.body.style.backgroundImage = 'url("Sunny_sm.gif")';
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/l0Iy5fjHyedk9aDGU/giphy.gif')";
 	} 
+	
+	else if(weatherJSON.daily.data[0].icon == "clear-day") {
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/VxbvpfaTTo3le/giphy.gif')";
+	}
+	
+	else if(weatherJSON.daily.data[0].icon == "clear-night") {
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/m5oQabBdoOye4/giphy.gif')";
+
+	}
+	
+	else if(weatherJSON.daily.data[0].icon == "snow") {
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/wvurizcBk3tmM/giphy.gif')";
+
+	}
+	
+	else if(weatherJSON.daily.data[0].icon == "wind") {
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/l2JHXMeTJL6BsLyfK/giphy.gif')";
+
+	}
+	
+	else if(weatherJSON.daily.data[0].icon == "thunderstorm") {
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/DV993b1od2vcs/giphy.gif')";
+
+	}
+	
+	else if(weatherJSON.daily.data[0].icon == "fog") {
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/J5Vv0RFl0VTEs/giphy.gif')";
+
+	}
+	
+	else if(weatherJSON.daily.data[0].icon == "cloudy-day") {
+		//Leaving as original.
+	}
+	
+	else if(weatherJSON.daily.data[0].icon == "cloudy-night") {
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/9U0RB30SGQtjO/giphy.gif')";
+
+	}
+	
+	else if(weatherJSON.daily.data[0].icon == "tornado") {
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/3t5EB2pMKLJni/giphy.gif')";
+
+	}
+	
 	else {
-		document.body.style.backgroundImage = 'url("Sunny_sm.gif")';
+		document.body.style.backgroundImage = "url('https://media.giphy.com/media/lE6MQFHe6NREA/giphy.gif')";
+		"Seems like we couldn't find the weather around you....";
 	}
 
 	//Does the current weather summary
     let weatherField = <HTMLElement>document.getElementById('currentWeatherDataField');
-    weatherField.innerHTML = 'SUMMARY: ' + weatherJSON.daily.summary;
+    weatherField.innerHTML = "<center>" + 'SUMMARY: ' + weatherJSON.daily.summary + "</center>";
 
     //Does the minute by minute summary
       let minField = <HTMLElement>document.getElementById('minuteByMinuteField');

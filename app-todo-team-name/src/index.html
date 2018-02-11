@@ -101,16 +101,6 @@
 		<div class="search-container">
 			<input type="text" placeholder="Please Enter Location..." name="location" id="locationSearchBox">
 			<button id="locationSearchButton">Submit</button>
-			<script>
-				var input = document.getElementById("locationSearchBox");
-				input.addEventListener("keyup", function(event) {
-					event.preventDefault();
-					if (event.keyCode === 13) {
-						document.getElementById("locationSearchButton").click();
-					}
-				}
-				});
-			</script>
 		</div>
 	</div>
 
@@ -127,46 +117,8 @@
 	<!-- Current Weather -->
 	<div class="backgroundBox">
 		<div class="transbox">
-			<h1>
-			<center>Current Weather</center>
-      </h1>
+			<h1><center>Current Weather</center></h1>
 			<div id="currentWeatherDataField">
-				<script>
-					function changeBackground() {
-						var weatherData = document.getElementById("currentWeatherDataField").innerHTML;
-						if (weatherData.indexOf('rain') >= 0) {
-							document.body.style.backgroundImage = url('gifs/Raining_sm.gif');
-						}
-
-						else if (weatherData.indexOf('sun') >= 0) {
-							document.body.style.backgroundImage = url('gifs/Sunny_sm.gif');
-						}
-
-						else if (weatherData.indexOf('storm') >= 0) {
-							document.body.style.backgroundImage = url('gifs/Lightning_sm.gif');
-						}
-
-						else if (weatherData.indexOf('sand') >= 0) {
-							document.body.style.backgroundImage = url('gifs/Sandstorm_sm.gif');
-						}
-
-						else if (weatherData.indexOf('cloud') >= 0) {
-							document.body.style.backgroundImage = url('gifs/Cloudy_sm.gif');
-						}
-
-						else if (weatherData.indexOf('snow') >= 0) {
-							document.body.style.backgroundImage = url('gifs/Snow_sm.gif');
-						}
-
-						else if (weatherData.indexOf('lightning') >= 0) {
-							document.body.style.backgroundImage = url('gifs/Lightning_sm.gif');
-						}
-
-						else {
-							<!-- Leave As Default -->
-						}
-					}
-				</script>
 			</div>
 		</div>
 	</div>

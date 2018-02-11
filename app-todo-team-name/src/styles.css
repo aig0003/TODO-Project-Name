@@ -1,8 +1,9 @@
 /* This is the entire page */
 body {
-	/*background-color: #393C59;*/
+	background-color: #393C59;
 	background-image: url('gifs/PartlySunny_sm.gif');
-	background-size: cover;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
 	margin: 0px;
 }	
 	/* Foooter */
