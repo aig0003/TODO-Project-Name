@@ -36,34 +36,34 @@
 	<div class="topnav">
 		<script>
 			function changeNav() {
-				var currentTime = new Date().getSeconds();
+				var currentTime = new Date().getHours();
 				
-				if (0 <= currentTime && currentTime < 10) {
+				if (4 <= currentTime && currentTime < 6) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#4E82ADAF";
 				}
 	
-				else if (10 <= currentTime && currentTime < 20) {
+				else if (6 <= currentTime && currentTime < 11) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#EBC248AF";
 				}
 				
-				else if (20 <= currentTime && currentTime < 30) {
+				else if (11 <= currentTime && currentTime < 13) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#E6963DAF";
 				}
 				
-				else if (30 <= currentTime && currentTime < 40) {
+				else if (13 <= currentTime && currentTime < 16) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#F64D02AF";
 				}
 				
-				else if (40 <= currentTime && currentTime < 50) {
+				else if (16 <= currentTime && currentTime < 20) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#6D3755AF";
 				}
 				
-				else if (50 <= currentTime && currentTime < 60) {
+				else if (20 <= currentTime && currentTime < 24) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#1E1A53AF";
 				}
 				
 				else {
-					<!-- Leave As Default -->
+					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#1E1A53AF";
 				}
 			}
 		</script>
