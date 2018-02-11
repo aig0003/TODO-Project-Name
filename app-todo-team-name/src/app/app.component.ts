@@ -62,49 +62,49 @@ export class AppComponent implements OnInit {
   }
 
   printWeatherData(weatherJSON:any) {
-	if(weatherJSON.daily.data[0].icon == "rain") {
+	if(weatherJSON.currently.icon == "rain") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/l0Iy5fjHyedk9aDGU/giphy.gif')";
 	} 
 	
-	else if(weatherJSON.daily.data[0].icon == "clear-day") {
+	else if(weatherJSON.currently.icon == "clear-day") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/VxbvpfaTTo3le/giphy.gif')";
 	}
 	
-	else if(weatherJSON.daily.data[0].icon == "clear-night") {
+	else if(weatherJSON.currently.icon == "clear-night") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/m5oQabBdoOye4/giphy.gif')";
 
 	}
 	
-	else if(weatherJSON.daily.data[0].icon == "snow") {
+	else if(weatherJSON.currently.icon == "snow") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/wvurizcBk3tmM/giphy.gif')";
 
 	}
 	
-	else if(weatherJSON.daily.data[0].icon == "wind") {
+	else if(weatherJSON.currently.icon == "wind") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/l2JHXMeTJL6BsLyfK/giphy.gif')";
 
 	}
 	
-	else if(weatherJSON.daily.data[0].icon == "thunderstorm") {
+	else if(weatherJSON.currently.icon == "thunderstorm") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/DV993b1od2vcs/giphy.gif')";
 
 	}
 	
-	else if(weatherJSON.daily.data[0].icon == "fog") {
+	else if(weatherJSON.currently.icon == "fog") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/J5Vv0RFl0VTEs/giphy.gif')";
 
 	}
 	
-	else if(weatherJSON.daily.data[0].icon == "cloudy-day") {
+	else if(weatherJSON.currently.icon == "cloudy-day") {
 		//Leaving as original.
 	}
 	
-	else if(weatherJSON.daily.data[0].icon == "cloudy-night") {
+	else if(weatherJSON.currently.icon == "cloudy-night") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/9U0RB30SGQtjO/giphy.gif')";
 
 	}
 	
-	else if(weatherJSON.daily.data[0].icon == "tornado") {
+	else if(weatherJSON.currently.icon == "tornado") {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/3t5EB2pMKLJni/giphy.gif')";
 
 	}
