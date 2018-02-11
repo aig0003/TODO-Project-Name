@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
 
   printLocationData(jsonData:any) {
     let locField = <HTMLElement>document.getElementById('locationDataField');
-    locField.innerHTML = jsonData.results[0].formatted_address; //There is a lot more info here, check https://developers.google.com/maps/documentation/geocoding/start for more.
+    locField.innerHTML = "<center><h2>" + jsonData.results[0].formatted_address + "</h2></center>"; //There is a lot more info here, check https://developers.google.com/maps/documentation/geocoding/start for more.
   }
   
   printWeatherData(weatherJSON:any) {
@@ -58,31 +58,70 @@ export class AppComponent implements OnInit {
     weatherField.innerHTML = 'SUMMARY: ' + weatherJSON.daily.summary;
 	
     //Does the minute by minute summary
-    let minField = <HTMLElement>document.getElementById('minuteByMinuteField');
-    minField.innerHTML  = "<center><i>Forecast for the next hour: " + weatherJSON.minutely.summary + "</i></center>";
-    minField.innerHTML += '<br><br><canvas id="precipChanceGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
-      '    padding-right: 0;\n' +
-      '    margin-left: auto;\n' +
-      '    margin-right: auto;\n' +
-      '    display: block;\n' +
-      '    width: 800px;"></canvas><br>\n';
-    let graph = <HTMLCanvasElement>document.getElementById('precipChanceGraph');
+      let minField = <HTMLElement>document.getElementById('minuteByMinuteField');
+      minField.innerHTML  = "<center><i>Forecast for the next hour: " + weatherJSON.minutely.summary + "</i></center>";
+      minField.innerHTML += '<br><br><canvas id="precipChanceGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+        '    padding-right: 0;\n' +
+        '    margin-left: auto;\n' +
+        '    margin-right: auto;\n' +
+        '    display: block;\n' +
+        '    width: 800px;"></canvas><br>\n';
+      let graph = <HTMLCanvasElement>document.getElementById('precipChanceGraph');
 
-    let ctx = graph.getContext("2d");
+      let ctx = graph.getContext("2d");
 
-    //Adds a gradient for the graph.
-    var grd=ctx.createLinearGradient(0,220,0,0);
-    grd.addColorStop(0,"cyan");
-    grd.addColorStop(1,"grey");
-    ctx.fillStyle=grd;
-    ctx.fillRect(0,0,1200,220);
+      //Adds a gradient for the graph.
+      var grd=ctx.createLinearGradient(0,220,0,0);
+      grd.addColorStop(0,"cyan");
+      grd.addColorStop(1,"grey");
+      ctx.fillStyle=grd;
+      ctx.fillRect(0,0,1200,220);
 
-    ctx.moveTo(0,0);
-    for (var i = 0; i < weatherJSON.minutely.data.length; i++)
-    {
-      ctx.lineTo(i*20, 220 - (weatherJSON.minutely.data[i].precipProbability * 200));
-      ctx.stroke();
-    }
+      ctx.moveTo(0,0);
+      for (var i = 0; i < weatherJSON.minutely.data.length; i++)
+      {
+        ctx.lineTo(i*20, 220 - (weatherJSON.minutely.data[i].precipProbability * 200));
+        ctx.stroke();
+      }
+
+    //Starts the hour by hour summary.
+      let hourField = <HTMLElement>document.getElementById('hourByHourField');
+      hourField.innerHTML  = "<center><i>Forecast for the next 48 hours: " + weatherJSON.hourly.summary + "</i></center>";
+      hourField.innerHTML += '<br><br><canvas id="hourPrecipChanceGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+        '    padding-right: 0;\n' +
+        '    margin-left: auto;\n' +
+        '    margin-right: auto;\n' +
+        '    display: block;\n' +
+        '    width: 800px;"></canvas><br>\n';
+      let hourGraph = <HTMLCanvasElement>document.getElementById('hourPrecipChanceGraph');
+
+      let hourCtx = hourGraph.getContext("2d");
+
+      //Adds a gradient for the graph.
+      var hourGrd=hourCtx.createLinearGradient(0,220,0,0);
+      hourGrd.addColorStop(0,"cyan");
+      hourGrd.addColorStop(1,"grey");
+      hourCtx.fillStyle=hourGrd;
+      hourCtx.fillRect(0,0,1200,220);
+
+      hourCtx.moveTo(0,0);
+      for (var i = 0; i < weatherJSON.hourly.data.length; i++)
+      {
+        hourCtx.lineTo(i*25, 220 - (weatherJSON.hourly.data[i].precipProbability * 200));
+        hourCtx.stroke();
+      }
+
+    //Creates a summary of the whole week.
+      let dailyField = <HTMLElement>document.getElementById('weekAtGlanceField');
+      dailyField.innerHTML = "<center><i>Your week at a glance: " + weatherJSON.daily.summary + "</i></center>";
+      dailyField.innerHTML += "<center><h4>Today: " + weatherJSON.daily.data[0].summary + "</h4></center>";
+      dailyField.innerHTML += "<center><h4>Tomorrow: " + weatherJSON.daily.data[1].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>2 Days: " + weatherJSON.daily.data[2].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>3 Days: " + weatherJSON.daily.data[3].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>4 Days: " + weatherJSON.daily.data[4].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>5 Days: " + weatherJSON.daily.data[5].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>6 Days: " + weatherJSON.daily.data[6].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>7 Days: " + weatherJSON.daily.data[7].summary + "</h4></center>"
   }
 
   printTimeMachine(oldJSON:any) {
