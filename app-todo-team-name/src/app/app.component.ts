@@ -104,6 +104,37 @@ export class AppComponent implements OnInit {
         hourCtx.stroke();
       }
 
+      //Hourly summary of temperature with graph.
+      let hourTempField = <HTMLElement>document.getElementById('hourByHourTempField');
+      hourTempField.innerHTML  += "<br><br><center><i>Hourly Temperature Breakdown: <br>High of " + weatherJSON.daily.data[0].temperatureHigh + ". <br>Low of " + weatherJSON.daily.data[0].temperatureLow + ".</i></center>";
+      hourTempField.innerHTML += '<br><br><canvas id="hourTempGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+        '    padding-right: 0;\n' +
+        '    margin-left: auto;\n' +
+        '    margin-right: auto;\n' +
+        '    display: block;\n' +
+        '    width: 800px;"></canvas><br>\n';
+      let hourTempGraph = <HTMLCanvasElement>document.getElementById('hourTempGraph');
+
+      let hourTempCtx = hourTempGraph.getContext("2d");
+
+      //Adds a gradient for the graph.
+      var hourTempGrd=hourTempCtx.createLinearGradient(0,220,0,0);
+      hourTempGrd.addColorStop(0,"red");
+      hourTempGrd.addColorStop(1,"grey");
+      hourTempCtx.fillStyle=hourTempGrd;
+      hourTempCtx.fillRect(0,0,1200,220);
+
+      hourTempCtx.moveTo(0,0);
+      for (var i = 0; i < weatherJSON.hourly.data.length; i++)
+      {
+        hourTempCtx.lineTo(i*25, 200 - (weatherJSON.hourly.data[i].temperature) * 1.5);
+        hourTempCtx.stroke();
+        if (i%4 ==0) {
+          hourTempCtx.font = "20px Arial";
+          hourTempCtx.strokeText(weatherJSON.hourly.data[i].temperature,i * 25, 220 - weatherJSON.hourly.data[i].temperature - 12);
+        }
+      }
+
     //Creates a summary of the whole week.
       let dailyField = <HTMLElement>document.getElementById('weekAtGlanceField');
       dailyField.innerHTML = "<center><i>Your week at a glance: " + weatherJSON.daily.summary + "</i></center>";
@@ -124,9 +155,9 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
-    let btn = document.getElementById('locationSearchButton');
+    let searchButton = document.getElementById('locationSearchButton');
     let userInput = <HTMLInputElement>document.getElementById('locationSearchBox');
-    btn.addEventListener("click", () => {
+    searchButton.addEventListener("click", () => {
       if (userInput.value.length > 0) {
         this.lookupAddressOnGoogle(userInput);
       } else {
