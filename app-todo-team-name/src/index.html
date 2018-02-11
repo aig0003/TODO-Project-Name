@@ -145,6 +145,14 @@
 	</div>
   <app-root></app-root> <!--this line is important-->
 
+  <!-- Weekly Forecast -->
+  <div class="backgroundBox">
+    <div class="transbox">
+      <h1><center>Week-at-a-Glance</center></h1>
+      <div id="weekAtGlanceField"></div>
+    </div>
+  </div>
+
 	<!-- Minute By Minute -->
 	<div class="backgroundBox">
 		<div class="transbox">
@@ -161,27 +169,25 @@
 		</div>
 	</div>
 
-  <!-- Weekly Forecast -->
-  <div class="backgroundBox">
-    <div class="transbox">
-      <h1><center>Week-at-a-Glance</center></h1>
-      <div id="weekAtGlanceField"></div>
-    </div>
-  </div>
-
 	<!-- Time Machine Label -->
 	<div class="backgroundBox">
 		<div class="transbox">
 			<h1><center>Time Machine</center></h1>
-			<div class="transbox">
-				One Day Ago
+			<div class="transbox" style="border: 0px; text-align: center;" id="oneDayAgoButton">
+				<button>One Day Ago</button>
 			</div>
-			<div class="transbox">
-				One Month Ago
-			</div>
-			<div class="transbox">
-				One Year Ago
-			</div>
+      <div id="oneDayAgoField"></div>
+
+      <div class="transbox" style="border: 0px; text-align: center;" id="oneMonthAgoButton">
+        <button>One Month Ago</button>
+      </div>
+      <div id="oneWeekAgoField"></div>
+
+      <div class="transbox" style="border: 0px; text-align: center;" id="oneYearAgoButton">
+        <button>One Year Ago</button>
+      </div>
+      <div id="oneYearAgoField"></div>
+
 			<div class="transbox">
 				Ten Years
 				<p style="text-align:right;">Please Select A Year

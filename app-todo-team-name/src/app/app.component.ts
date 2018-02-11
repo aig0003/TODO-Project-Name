@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
   printLocationData(jsonData:any) {
     let locField = <HTMLElement>document.getElementById('locationDataField');
-    locField.innerHTML = jsonData.results[0].formatted_address; //There is a lot more info here, check https://developers.google.com/maps/documentation/geocoding/start for more.
+    locField.innerHTML = "<center><h2>" + jsonData.results[0].formatted_address + "</h2></center>"; //There is a lot more info here, check https://developers.google.com/maps/documentation/geocoding/start for more.
   }
 
   printWeatherData(weatherJSON:any) {
@@ -106,7 +106,15 @@ export class AppComponent implements OnInit {
 
     //Creates a summary of the whole week.
       let dailyField = <HTMLElement>document.getElementById('weekAtGlanceField');
-      dailyField.innerHTML = "<center><i>Your week at a glance: " + weatherJSON.daily.summary + "</i></center>"
+      dailyField.innerHTML = "<center><i>Your week at a glance: " + weatherJSON.daily.summary + "</i></center>";
+      dailyField.innerHTML += "<center><h4>Today: " + weatherJSON.daily.data[0].summary + "</h4></center>";
+      dailyField.innerHTML += "<center><h4>Tomorrow: " + weatherJSON.daily.data[1].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>2 Days: " + weatherJSON.daily.data[2].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>3 Days: " + weatherJSON.daily.data[3].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>4 Days: " + weatherJSON.daily.data[4].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>5 Days: " + weatherJSON.daily.data[5].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>6 Days: " + weatherJSON.daily.data[6].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>7 Days: " + weatherJSON.daily.data[7].summary + "</h4></center>"
   }
 
   printTimeMachine(oldJSON:any) {
