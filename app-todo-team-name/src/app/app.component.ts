@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 		  console.log(json);
 		  this.printWeatherData(json);
       });
-	
+
   }
 
   lookupAddressOnGoogle(userInput: HTMLInputElement){
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
     let locField = <HTMLElement>document.getElementById('locationDataField');
     locField.innerHTML = "<center><h2>" + jsonData.results[0].formatted_address + "</h2></center>"; //There is a lot more info here, check https://developers.google.com/maps/documentation/geocoding/start for more.
   }
-  
+
   printWeatherData(weatherJSON:any) {
 	if(weatherJSON.daily.data[0].icon == "rain") {
 		document.body.style.backgroundImage = 'url("Sunny_sm.gif")';
@@ -53,11 +53,11 @@ export class AppComponent implements OnInit {
 	else {
 		document.body.style.backgroundImage = 'url("Sunny_sm.gif")';
 	}
-	
+
 	//Does the current weather summary
     let weatherField = <HTMLElement>document.getElementById('currentWeatherDataField');
     weatherField.innerHTML = 'SUMMARY: ' + weatherJSON.daily.summary;
-	
+
     //Does the minute by minute summary
       let minField = <HTMLElement>document.getElementById('minuteByMinuteField');
       minField.innerHTML  = "<center><i>Forecast for the next hour: " + weatherJSON.minutely.summary + "</i></center>";
@@ -83,6 +83,10 @@ export class AppComponent implements OnInit {
       {
         ctx.lineTo(i*20, 220 - (weatherJSON.minutely.data[i].precipProbability * 200));
         ctx.stroke();
+        if (i%5 ==0) {
+          ctx.font = "20px Arial";
+          ctx.strokeText(Math.round(weatherJSON.minutely.data[i].precipProbability * 100) + "%",i * 25 + 2, 100);
+        }
       }
 
     //Starts the hour by hour summary.
@@ -110,31 +114,132 @@ export class AppComponent implements OnInit {
       {
         hourCtx.lineTo(i*25, 220 - (weatherJSON.hourly.data[i].precipProbability * 200));
         hourCtx.stroke();
+        if (i%4 ==0) {
+          hourCtx.font = "20px Arial";
+          hourCtx.strokeText(Math.round(weatherJSON.hourly.data[i].precipProbability * 100) + "%",i * 25 + 2, 100);
+        }
+      }
+
+      //Hourly summary of temperature with graph.
+      let hourTempField = <HTMLElement>document.getElementById('hourByHourTempField');
+      hourTempField.innerHTML  += "<br><br><center><i>Hourly Temperature Breakdown: <br>High of " + weatherJSON.daily.data[0].temperatureHigh + ". <br>Low of " + weatherJSON.daily.data[0].temperatureLow + ".</i></center>";
+      hourTempField.innerHTML += '<br><br><canvas id="hourTempGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+        '    padding-right: 0;\n' +
+        '    margin-left: auto;\n' +
+        '    margin-right: auto;\n' +
+        '    display: block;\n' +
+        '    width: 800px;"></canvas><br>\n';
+      let hourTempGraph = <HTMLCanvasElement>document.getElementById('hourTempGraph');
+
+      let hourTempCtx = hourTempGraph.getContext("2d");
+
+      //Adds a gradient for the graph.
+      var hourTempGrd=hourTempCtx.createLinearGradient(0,220,0,0);
+      hourTempGrd.addColorStop(0,"red");
+      hourTempGrd.addColorStop(1,"grey");
+      hourTempCtx.fillStyle=hourTempGrd;
+      hourTempCtx.fillRect(0,0,1200,220);
+
+      hourTempCtx.moveTo(0,0);
+      for (var i = 0; i < weatherJSON.hourly.data.length; i++)
+      {
+        hourTempCtx.lineTo(i*25, 200 - (weatherJSON.hourly.data[i].temperature) * 1.5);
+        hourTempCtx.stroke();
+        if (i%4 ==0) {
+          hourTempCtx.font = "20px Arial";
+          hourTempCtx.strokeText(weatherJSON.hourly.data[i].temperature,i * 25, 220 - weatherJSON.hourly.data[i].temperature - 60);
+        }
       }
 
     //Creates a summary of the whole week.
       let dailyField = <HTMLElement>document.getElementById('weekAtGlanceField');
       dailyField.innerHTML = "<center><i>Your week at a glance: " + weatherJSON.daily.summary + "</i></center>";
-      dailyField.innerHTML += "<center><h4>Today: " + weatherJSON.daily.data[0].summary + "</h4></center>";
-      dailyField.innerHTML += "<center><h4>Tomorrow: " + weatherJSON.daily.data[1].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>2 Days: " + weatherJSON.daily.data[2].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>3 Days: " + weatherJSON.daily.data[3].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>4 Days: " + weatherJSON.daily.data[4].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>5 Days: " + weatherJSON.daily.data[5].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>6 Days: " + weatherJSON.daily.data[6].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>7 Days: " + weatherJSON.daily.data[7].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>Today: " + weatherJSON.daily.data[0].summary +
+		" The high is " + weatherJSON.daily.data[0].temperatureHigh + " and the low is " + weatherJSON.daily.data[0].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>Tomorrow: " + weatherJSON.daily.data[1].summary +
+		" The high is " + weatherJSON.daily.data[1].temperatureHigh + " and the low is " + weatherJSON.daily.data[1].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>2 Days: " + weatherJSON.daily.data[2].summary +
+		" The high is " + weatherJSON.daily.data[2].temperatureHigh + " and the low is " + weatherJSON.daily.data[2].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>3 Days: " + weatherJSON.daily.data[3].summary +
+		" The high is " + weatherJSON.daily.data[3].temperatureHigh + " and the low is " + weatherJSON.daily.data[3].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>4 Days: " + weatherJSON.daily.data[4].summary +
+		" The high is " + weatherJSON.daily.data[4].temperatureHigh + " and the low is " + weatherJSON.daily.data[4].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>5 Days: " + weatherJSON.daily.data[5].summary +
+		" The high is " + weatherJSON.daily.data[5].temperatureHigh + " and the low is " + weatherJSON.daily.data[5].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>6 Days: " + weatherJSON.daily.data[6].summary +
+		" The high is " + weatherJSON.daily.data[6].temperatureHigh + " and the low is " + weatherJSON.daily.data[6].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>7 Days: " + weatherJSON.daily.data[7].summary +
+		" The high is " + weatherJSON.daily.data[7].temperatureHigh + " and the low is " + weatherJSON.daily.data[7].temperatureLow + ".</h4></center>";
   }
 
-  printTimeMachine(oldJSON:any) {
+  useTimeMachine(warpJSON:any, date:number, editthis:HTMLElement, editthis2:HTMLElement) {
+	  this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9c4b29b11/' + warpJSON.lat + ',' + warpJSON.lng + ',' + date)
+      .subscribe((json: any) => {
+		  console.log(json);
+		  //insert some math here
+		  editthis.innerHTML = "<center><i> Hourly Forecast for this day in history: </center></i>";
+		  editthis.innerHTML += '<br><br><canvas id="hourPrecipGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+        '    padding-right: 0;\n' +
+        '    margin-left: auto;\n' +
+        '    margin-right: auto;\n' +
+        '    display: block;\n' +
+        '    width: 800px;"></canvas><br>\n';
+		  let oldGraph = <HTMLCanvasElement>document.getElementById('hourPrecipGraph');
 
+          let oldCtx = hourGraph.getContext("2d");
+
+          //Adds a gradient for the graph.
+          var oldGrd=oldCtx.createLinearGradient(0,220,0,0);
+          oldGrd.addColorStop(0,"cyan");
+          oldGrd.addColorStop(1,"grey");
+          oldCtx.fillStyle=hourGrd;
+          oldCtx.fillRect(0,0,1200,220);
+
+          oldCtx.moveTo(0,0);
+          for (var i = 0; i < warpJSON.hourly.data.length; i++)
+          {
+            oldCtx.lineTo(i*25, 220 - (warpJSON.hourly.data[i].precipProbability * 200));
+            oldCtx.stroke();
+          }
+		  
+		  //Hourly summary of temperature with graph.
+			editthis2.innerHTML  += "<br><br><center><i>Hourly Temperature Breakdown: <br>High of " + warpJSON.daily.data[0].temperatureHigh + ". <br>Low of " + warpJSON.daily.data[0].temperatureLow + ".</i></center>";
+			editthis2.innerHTML += '<br><br><canvas id="hourEditGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+		'    padding-right: 0;\n' +
+        '    margin-left: auto;\n' +
+        '    margin-right: auto;\n' +
+        '    display: block;\n' +
+        '    width: 800px;"></canvas><br>\n';
+			let hourEditGraph = <HTMLCanvasElement>document.getElementById('hourEditGraph');
+
+			let hourEditCtx = hourEditGraph.getContext("2d");
+
+			//Adds a gradient for the graph.
+			var hourEditGrd=hourEditCtx.createLinearGradient(0,220,0,0);
+			hourEditGrd.addColorStop(0,"red");
+			hourEditGrd.addColorStop(1,"grey");
+			hourEditCtx.fillStyle=hourTempGrd;
+			hourEditCtx.fillRect(0,0,1200,220);
+
+			hourEditCtx.moveTo(0,0);
+			for (var i = 0; i < warpJSON.hourly.data.length; i++)
+			{
+				hourEditCtx.lineTo(i*25, 200 - (warpJSON.hourly.data[i].temperature) * 1.5);
+				hourEditCtx.stroke();
+				if (i%4 ==0) {
+				hourEditCtx.font = "20px Arial";
+				hourEditCtx.strokeText(warpJSON.hourly.data[i].temperature,i * 25, 220 - warpJSON.hourly.data[i].temperature - 12);
+				}
+			}
+
+          });
   }
-
 
 
   ngOnInit() {
-    let btn = document.getElementById('locationSearchButton');
+    let searchButton = document.getElementById('locationSearchButton');
     let userInput = <HTMLInputElement>document.getElementById('locationSearchBox');
-    btn.addEventListener("click", () => {
+    searchButton.addEventListener("click", () => {
       if (userInput.value.length > 0) {
         this.lookupAddressOnGoogle(userInput);
       } else {
