@@ -37,31 +37,31 @@
 		<script>
 			function changeNav() {
 				var currentTime = new Date().getSeconds();
-				
+
 				if (0 <= currentTime && currentTime < 10) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#4E82ADAF";
 				}
-	
+
 				else if (10 <= currentTime && currentTime < 20) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#EBC248AF";
 				}
-				
+
 				else if (20 <= currentTime && currentTime < 30) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#E6963DAF";
 				}
-				
+
 				else if (30 <= currentTime && currentTime < 40) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#F64D02AF";
 				}
-				
+
 				else if (40 <= currentTime && currentTime < 50) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#6D3755AF";
 				}
-				
+
 				else if (50 <= currentTime && currentTime < 60) {
 					document.getElementsByClassName("topnav")[0].style.backgroundColor = "#1E1A53AF";
 				}
-				
+
 				else {
 					<!-- Leave As Default -->
 				}
@@ -191,38 +191,43 @@
 	<div class="backgroundBox">
 		<div class="transbox">
 			<h1><center>Time Machine</center></h1>
-			<div class="transbox" style="border: 0px; text-align: center;" id="oneDayAgoButton">
-				<button>One Day Ago</button>
+			<div class="transbox" style="border: 0px; text-align: center;">
+				<button id="oneDayAgoButton">One Day Ago</button>
 			</div>
-      <div id="oneDayAgoField"></div>
+      <div id="oneDayAgoTemp"></div>
+      <div id="oneDayAgoPrecip"></div>
 
-      <div class="transbox" style="border: 0px; text-align: center;" id="oneMonthAgoButton">
-        <button>One Month Ago</button>
+      <div class="transbox" style="border: 0px; text-align: center;">
+        <button id="oneMonthAgoButton">One Month Ago</button>
       </div>
-      <div id="oneWeekAgoField"></div>
+      <div id="oneMonthAgoTemp"></div>
+      <div id="oneMonthAgoPrecip"></div>
 
-      <div class="transbox" style="border: 0px; text-align: center;" id="oneYearAgoButton">
-        <button>One Year Ago</button>
+      <div class="transbox" style="border: 0px; text-align: center;">
+        <button id="oneYearAgoButton">One Year Ago</button>
       </div>
-      <div id="oneYearAgoField"></div>
+      <div id="oneYearAgoTemp"></div>
+      <div id="oneYearAgoPrecip"></div>
 
-			<div class="transbox">
-				Ten Years
-				<p style="text-align:right;">Please Select A Year
-				<select>
-					<option value="2017">2017</option>
-					<option value="2016">2016</option>
-					<option value="2015">2015</option>
-					<option value="2014">2014</option>
-					<option value="2013">2013</option>
-					<option value="2012">2012</option>
-					<option value="2011">2011</option>
-					<option value="2010">2010</option>
-					<option value="2009">2009</option>
-					<option value="2008">2008</option>
-				</select>
-				</p>
-			</div>
+      <div class="transbox" style="border: 0px; text-align: center;">
+        <p style="text-align:center;">Please Select A Year
+          <select id="yearSelect">
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+          </select>
+        <button id="multiYearAgoButton">Go</button>
+      </div>
+      <div id="multiYearAgoTemp"></div>
+      <div id="multiYearAgoPrecip"></div>
+
 		</div>
 	</div>
 
@@ -239,7 +244,7 @@
 		<a href="https://darksky.net">
 			<img src="https://darksky.net/dev/img/attribution/poweredby-oneline-darkbackground.png" height = "40px" width="250px" alt="Powered By DarkSky.net">
 		</a>
-		
+
 		<a href="https://google.com">
 			<img src="https://developers.google.com/places/documentation/images/powered-by-google-on-non-white.png" alt="Powered By Google.com" height="25px">
 		</a>
