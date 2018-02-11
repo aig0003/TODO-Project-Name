@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
 
   printWeatherData(weatherJSON:any) {
 	if(weatherJSON.daily.data[0].icon == "rain") {
-		<HTMLElement>document.body.style.backgroundImage = 'url("gifs/Raining_sm.gif")';
+		document.body.style.backgroundImage = 'url("gifs/Raining_sm.gif")';
 	} else {
 		document.body.style.backgroundImage = 'url("file:///PATH-TO/Raining_sm.gif")';
 	}
@@ -84,7 +84,7 @@ export class AppComponent implements OnInit {
         ctx.stroke();
         if (i%5 ==0) {
           ctx.font = "20px Arial";
-          ctx.strokeText(Math.round(weatherJSON.minutely.data[i].precipProbability * 200) + "%",i * 25 + 2, 220 - weatherJSON.minutely.data[i].precipProbability * 200 - 60);
+          ctx.strokeText(Math.round(weatherJSON.minutely.data[i].precipProbability * 200) + "%",i * 25 + 2, 100);
         }
       }
 
@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
         hourCtx.stroke();
         if (i%4 ==0) {
           hourCtx.font = "20px Arial";
-          hourCtx.strokeText(Math.round(weatherJSON.hourly.data[i].precipProbability * 200) + "%",i * 25 + 2, 220 - weatherJSON.hourly.data[i].precipProbability * 200 - 60);
+          hourCtx.strokeText(Math.round(weatherJSON.hourly.data[i].precipProbability * 200) + "%",i * 25 + 2, 100);
         }
       }
 
