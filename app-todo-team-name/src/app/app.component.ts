@@ -108,7 +108,7 @@ export class AppComponent implements OnInit {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/3t5EB2pMKLJni/giphy.gif')";
 
 	}
-	
+
 	else {
 		document.body.style.backgroundImage = "url('https://media.giphy.com/media/lE6MQFHe6NREA/giphy.gif')";
 		"Seems like we couldn't find the weather around you....";
@@ -116,7 +116,7 @@ export class AppComponent implements OnInit {
 
 	//Does the current weather summary
     let weatherField = <HTMLElement>document.getElementById('currentWeatherDataField');
-    weatherField.innerHTML = "<center>" + 'SUMMARY: ' + weatherJSON.daily.summary + "</center>";
+    weatherField.innerHTML = "<center><h2>" + weatherJSON.daily.summary + "</h2></center>";
 
     //Does the minute by minute summary
       let minField = <HTMLElement>document.getElementById('minuteByMinuteField');
