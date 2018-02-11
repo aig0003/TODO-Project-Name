@@ -1,7 +1,7 @@
 /* This is the entire page */
 body {
 	/*background-color: #393C59;*/
-	background-image: url('gifs/Raining_sm.gif');
+	background-image: url('gifs/PartlySunny_sm.gif');
 	background-size: cover;
 	
 	
@@ -9,7 +9,7 @@ body {
 }
 	/*Navigation Bar Start	*/
 	
-	div.topnav {
+	.topnav {
 		overflow: hidden;
 		background-color: #6696ba7F;
 	}

@@ -107,15 +107,35 @@
 					function changeBackground() {
 						var weatherData = document.getElementByID("currentWeatherDataField").innerHTML;
 						if (weatherData.indexOf('rain') >= 0) {
-							
+							document.body.style.backgroundImage = url('gifs/Raining_sm.gif');
 						}
 						
 						else if (weatherData.indexOf('sun') >= 0) {
-						
+							document.body.style.backgroundImage = url('gifs/Sunny_sm.gif');
 						}
 						
-						else if (weatherDAta.indexOf('storm') >= 0) {
+						else if (weatherData.indexOf('storm') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Lightning_sm.gif');
+						}
 						
+						else if (weatherData.indexOf('sand') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Sandstorm_sm.gif');
+						}
+						
+						else if (weatherData.indexOf('cloud') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Cloudy_sm.gif');
+						}
+						
+						else if (weatherData.indexOf('snow') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Snow_sm.gif');
+						}
+						
+						else if (weatherData.indexOf('lightning') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Lightning_sm.gif');
+						}
+						
+						else {
+							<!-- Leave As Default -->
 						}
 					}
 				</script>
