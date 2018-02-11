@@ -163,7 +163,7 @@ export class AppComponent implements OnInit {
 		" The high is " + weatherJSON.daily.data[7].temperatureHigh + " and the low is " + weatherJSON.daily.data[7].temperatureLow + ".</h4></center>";
   }
 
-  /*useTimeMachine(warpJSON:any, date:number, editthis:HTMLElement) {
+  useTimeMachine(warpJSON:any, date:number, editthis:HTMLElement, editthis2:HTMLElement) {
 	  this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9c4b29b11/' + warpJSON.lat + ',' + warpJSON.lng + ',' + date)
       .subscribe((json: any) => {
 		  console.log(json);
@@ -192,9 +192,39 @@ export class AppComponent implements OnInit {
             oldCtx.lineTo(i*25, 220 - (warpJSON.hourly.data[i].precipProbability * 200));
             oldCtx.stroke();
           }
+		  
+		  //Hourly summary of temperature with graph.
+			editthis2.innerHTML  += "<br><br><center><i>Hourly Temperature Breakdown: <br>High of " + warpJSON.daily.data[0].temperatureHigh + ". <br>Low of " + warpJSON.daily.data[0].temperatureLow + ".</i></center>";
+			editthis2.innerHTML += '<br><br><canvas id="hourEditGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+		'    padding-right: 0;\n' +
+        '    margin-left: auto;\n' +
+        '    margin-right: auto;\n' +
+        '    display: block;\n' +
+        '    width: 800px;"></canvas><br>\n';
+			let hourEditGraph = <HTMLCanvasElement>document.getElementById('hourEditGraph');
+
+			let hourEditCtx = hourEditGraph.getContext("2d");
+
+			//Adds a gradient for the graph.
+			var hourEditGrd=hourEditCtx.createLinearGradient(0,220,0,0);
+			hourEditGrd.addColorStop(0,"red");
+			hourEditGrd.addColorStop(1,"grey");
+			hourEditCtx.fillStyle=hourTempGrd;
+			hourEditCtx.fillRect(0,0,1200,220);
+
+			hourEditCtx.moveTo(0,0);
+			for (var i = 0; i < warpJSON.hourly.data.length; i++)
+			{
+				hourEditCtx.lineTo(i*25, 200 - (warpJSON.hourly.data[i].temperature) * 1.5);
+				hourEditCtx.stroke();
+				if (i%4 ==0) {
+				hourEditCtx.font = "20px Arial";
+				hourEditCtx.strokeText(warpJSON.hourly.data[i].temperature,i * 25, 220 - warpJSON.hourly.data[i].temperature - 12);
+				}
+			}
 
           });
-  }*/
+  }
 
 
   ngOnInit() {
