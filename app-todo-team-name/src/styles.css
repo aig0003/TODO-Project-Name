@@ -1,6 +1,7 @@
 /* This is the entire page */
 body {
-	/*background-color: #393C59;*/
+	background-color: #2f3da4;
+	background-image: url('https://media1.tenor.com/images/66286c21e00a4ef6707abb4bfe19dcb3/tenor.gif?itemid=5043292');
 	background-image: url('gifs/PartlySunny_sm.gif');
 	background-size: cover;
 	margin: 0px;

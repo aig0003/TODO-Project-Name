@@ -32,8 +32,6 @@
 	div.transbox p	{
 		margin: 5%;
 		font-weight: bold;
-		color: white;
-		font-family: Helvetica;
 	}
 	<!-- Current Weather Box End -->
 
@@ -109,6 +107,16 @@
 		<div class="search-container">
 			<input type="text" placeholder="Please Enter Location..." name="location" id="locationSearchBox">
 			<button id="locationSearchButton">Submit</button>
+			
+			<script>
+			var input = document.getElementById("text");
+			input.addEventListener("keyup", function(event) {
+			event.preventDefault();
+			if (event.keyCode === 13) {
+			document.getElementById("locationSearchButton").click();
+		}
+		});
+		</script>
 		</div>
 	</div>
 
