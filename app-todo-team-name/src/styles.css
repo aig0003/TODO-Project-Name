@@ -3,15 +3,14 @@ body {
 	/*background-color: #393C59;*/
 	background-image: url('gifs/PartlySunny_sm.gif');
 	background-size: cover;
-	
-	
-	
+	margin: 0px;
 }
 	/*Navigation Bar Start	*/
 	
 	.topnav {
 		overflow: hidden;
 		background-color: #6696ba7F;
+		
 	}
 
 	.topnav a {
