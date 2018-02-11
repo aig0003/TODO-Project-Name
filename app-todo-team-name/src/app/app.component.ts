@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
 		  console.log(json);
 		  this.printWeatherData(json);
       });
+	
   }
 
   lookupAddressOnGoogle(userInput: HTMLInputElement){
@@ -44,12 +45,18 @@ export class AppComponent implements OnInit {
     let locField = <HTMLElement>document.getElementById('locationDataField');
     locField.innerHTML = "<center><h2>" + jsonData.results[0].formatted_address + "</h2></center>"; //There is a lot more info here, check https://developers.google.com/maps/documentation/geocoding/start for more.
   }
-
+  
   printWeatherData(weatherJSON:any) {
-    //Does the current weather summary
+	if(weatherJSON.daily.data[0].icon == "rain") {
+		<HTMLElement>document.body.style.backgroundImage = 'url("gifs/Raining_sm.gif")';
+	} else {
+		document.body.style.backgroundImage = 'url("file:///PATH-TO/Raining_sm.gif")';
+	}
+	
+	//Does the current weather summary
     let weatherField = <HTMLElement>document.getElementById('currentWeatherDataField');
-    weatherField.innerHTML = 'Summary: ' + weatherJSON.daily.summary;
-
+    weatherField.innerHTML = 'SUMMARY: ' + weatherJSON.daily.summary;
+	
     //Does the minute by minute summary
       let minField = <HTMLElement>document.getElementById('minuteByMinuteField');
       minField.innerHTML  = "<center><i>Forecast for the next hour: " + weatherJSON.minutely.summary + "</i></center>";
