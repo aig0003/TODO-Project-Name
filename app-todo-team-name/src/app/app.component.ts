@@ -13,15 +13,18 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
-  locateByCoordinates(latitude : number, longitude : number) {
+  locateByCoordinates(jsonData:any) {
+	console.log(jsonData);
+	console.log(jsonData.lng);
     console.log("Run test function");
-	this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9c4b29b11/37.8267,-122.4233')
+	this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9c4b29b11/' + jsonData.lat + ',' + jsonData.lng)
       .subscribe((json: any) => {
-        if (json.results.length != 0) { //If there are no results then the address is invalid.
+		  console.log(json);
+        /*if (json.results.length != 0) { //If there are no results then the address is invalid.
           console.log(json.results);
         } else {
           alert("Invalid address. Please try again");
-        }
+        }*/
       });
   }
 
