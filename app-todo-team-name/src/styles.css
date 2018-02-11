@@ -4,6 +4,7 @@ body {
 	background-image: url('gifs/PartlySunny_sm.gif');
 	background-size: 100% auto;
 	background-repeat: no-repeat;
+	background-attachment: fixed;
 	margin: 0px;
 }	
 
