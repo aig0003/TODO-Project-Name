@@ -145,20 +145,56 @@ export class AppComponent implements OnInit {
     //Creates a summary of the whole week.
       let dailyField = <HTMLElement>document.getElementById('weekAtGlanceField');
       dailyField.innerHTML = "<center><i>Your week at a glance: " + weatherJSON.daily.summary + "</i></center>";
-      dailyField.innerHTML += "<center><h4>Today: " + weatherJSON.daily.data[0].summary + "</h4></center>";
-      dailyField.innerHTML += "<center><h4>Tomorrow: " + weatherJSON.daily.data[1].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>2 Days: " + weatherJSON.daily.data[2].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>3 Days: " + weatherJSON.daily.data[3].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>4 Days: " + weatherJSON.daily.data[4].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>5 Days: " + weatherJSON.daily.data[5].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>6 Days: " + weatherJSON.daily.data[6].summary + "</h4></center>"
-      dailyField.innerHTML += "<center><h4>7 Days: " + weatherJSON.daily.data[7].summary + "</h4></center>"
+      dailyField.innerHTML += "<center><h4>Today: " + weatherJSON.daily.data[0].summary + 
+		" The high is " + weatherJSON.daily.data[0].temperatureHigh + " and the low is " + weatherJSON.daily.data[0].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>Tomorrow: " + weatherJSON.daily.data[1].summary + 
+		" The high is " + weatherJSON.daily.data[1].temperatureHigh + " and the low is " + weatherJSON.daily.data[1].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>2 Days: " + weatherJSON.daily.data[2].summary + 
+		" The high is " + weatherJSON.daily.data[2].temperatureHigh + " and the low is " + weatherJSON.daily.data[2].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>3 Days: " + weatherJSON.daily.data[3].summary + 
+		" The high is " + weatherJSON.daily.data[3].temperatureHigh + " and the low is " + weatherJSON.daily.data[3].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>4 Days: " + weatherJSON.daily.data[4].summary + 
+		" The high is " + weatherJSON.daily.data[4].temperatureHigh + " and the low is " + weatherJSON.daily.data[4].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>5 Days: " + weatherJSON.daily.data[5].summary + 
+		" The high is " + weatherJSON.daily.data[5].temperatureHigh + " and the low is " + weatherJSON.daily.data[5].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>6 Days: " + weatherJSON.daily.data[6].summary + 
+		" The high is " + weatherJSON.daily.data[6].temperatureHigh + " and the low is " + weatherJSON.daily.data[6].temperatureLow + ".</h4></center>";
+      dailyField.innerHTML += "<center><h4>7 Days: " + weatherJSON.daily.data[7].summary + 
+		" The high is " + weatherJSON.daily.data[7].temperatureHigh + " and the low is " + weatherJSON.daily.data[7].temperatureLow + ".</h4></center>";
   }
 
-  printTimeMachine(oldJSON:any) {
+  /*useTimeMachine(warpJSON:any, date:number, editthis:HTMLElement) {
+	  this.http.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/32a8eb0840407bdd23b2b1a9c4b29b11/' + warpJSON.lat + ',' + warpJSON.lng + ',' + date)
+      .subscribe((json: any) => {
+		  console.log(json);
+		  //insert some math here
+		  editthis.innerHTML = "<center><i> Hourly Forecast for this day in history: </center></i>";
+		  editthis.innerHTML += '<br><br><canvas id="hourPrecipGraph" width="1200" height="220" style="border:2px solid #000000; padding-left: 0;\n' +
+        '    padding-right: 0;\n' +
+        '    margin-left: auto;\n' +
+        '    margin-right: auto;\n' +
+        '    display: block;\n' +
+        '    width: 800px;"></canvas><br>\n';
+		  let oldGraph = <HTMLCanvasElement>document.getElementById('hourPrecipGraph');
 
-  }
+          let oldCtx = hourGraph.getContext("2d");
 
+          //Adds a gradient for the graph.
+          var oldGrd=oldCtx.createLinearGradient(0,220,0,0);
+          oldGrd.addColorStop(0,"cyan");
+          oldGrd.addColorStop(1,"grey");
+          oldCtx.fillStyle=hourGrd;
+          oldCtx.fillRect(0,0,1200,220);
+
+          oldCtx.moveTo(0,0);
+          for (var i = 0; i < warpJSON.hourly.data.length; i++)
+          {
+            oldCtx.lineTo(i*25, 220 - (warpJSON.hourly.data[i].precipProbability * 200));
+            oldCtx.stroke();
+          }
+
+          });
+  }*/
 
 
   ngOnInit() {
