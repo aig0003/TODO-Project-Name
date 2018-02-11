@@ -38,15 +38,16 @@
 <body onload = displayClock() changeNav();>
 	<div class="topnav">
 		<!-- Change Navigation Bar Based On Time -->
-		<script type="text/javascript">
+		<script>
 			function changeNav() {
 				var currentTime = new Date().getHours();
+				
 				if (0 <= currentTime && currentTime < 4) {
 					document.getElementById("topnav").style.backgroundColor = "yellow";
 				}
 
-				else if (13 <= currentTime && currentTime < 16) {
-					document.getElementById("topnav").style.backgroundColor = "yellow";
+				else if (13 <= currentTime && currentTime < 24) {
+					document.getElementById("topnav").style.backgroundColor = "#000000";
 				}
 			}
 		</script>
@@ -99,9 +100,48 @@
 	<!-- Current Weather -->
 	<div class="backgroundBox">
 		<div class="transbox">
-      <h1><center>Current Weather</center></h1>
-			<div id="currentWeatherDataField"></div>
+			<h1>
+			<center>Current Weather</center>
+			<div id="currentWeatherDataField">
+				<script>
+					function changeBackground() {
+						var weatherData = document.getElementByID("currentWeatherDataField").innerHTML;
+						if (weatherData.indexOf('rain') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Raining_sm.gif');
+						}
+						
+						else if (weatherData.indexOf('sun') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Sunny_sm.gif');
+						}
+						
+						else if (weatherData.indexOf('storm') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Lightning_sm.gif');
+						}
+						
+						else if (weatherData.indexOf('sand') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Sandstorm_sm.gif');
+						}
+						
+						else if (weatherData.indexOf('cloud') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Cloudy_sm.gif');
+						}
+						
+						else if (weatherData.indexOf('snow') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Snow_sm.gif');
+						}
+						
+						else if (weatherData.indexOf('lightning') >= 0) {
+							document.body.style.backgroundImage = url('gifs/Lightning_sm.gif');
+						}
+						
+						else {
+							<!-- Leave As Default -->
+						}
+					}
+				</script>
 			</div>
+			</h1>
+		</div>
 	</div>
   <app-root></app-root> <!--this line is important-->
 
